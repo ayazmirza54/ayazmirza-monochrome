@@ -7,15 +7,16 @@ export type Certification = {
    */
   issuerIconName?: string
   /**
-   * Issue date in ISO format (YYYY-MM-DD).
+   * Issue date in ISO format (YYYY-MM-DD); undated credentials sort last.
    */
-  issueDate: string
+  issueDate?: string
   /**
    * Certificate or credential identifier; leave empty if not applicable.
    */
   credentialID: string
   /**
-   * Public verification URL or link to the certificate document. Used as the anchor href.
+   * Public verification URL or link to the certificate document. Used as the anchor href;
+   * without it the entry renders as plain text.
    */
-  credentialURL: string
+  credentialURL?: string
 }

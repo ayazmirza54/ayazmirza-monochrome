@@ -23,12 +23,20 @@ describe("RECOGNITION", () => {
   })
 
   it("orders RECOGNITION_BY_DATE by parseable dates, newest first", () => {
-    const times = RECOGNITION_BY_DATE.map((entry) =>
-      new Date(entry.date).getTime()
-    )
+    const dated = RECOGNITION_BY_DATE.filter((entry) => entry.date)
+    const times = dated.map((entry) => new Date(entry.date!).getTime())
 
     expect(times.some(Number.isNaN)).toBe(false)
     expect(times).toEqual([...times].sort((a, b) => b - a))
+  })
+
+  it("puts undated entries after every dated one", () => {
+    const firstUndated = RECOGNITION_BY_DATE.findIndex((entry) => !entry.date)
+    const lastDated = RECOGNITION_BY_DATE.findLastIndex((entry) => entry.date)
+
+    if (firstUndated !== -1) {
+      expect(lastDated).toBeLessThan(firstUndated)
+    }
   })
 
   it("puts pinned entries first, then the rest in date order", () => {

@@ -8,6 +8,7 @@ import {
   PaperclipIcon,
 } from "lucide-react"
 
+import { cn } from "@/lib/utils"
 import {
   CollapsibleContent,
   CollapsibleTrigger,
@@ -104,9 +105,12 @@ function AwardRow({ entry }: { entry: AwardRecognition }) {
 
               <MetaSeparator />
 
-              <DateTerm label="Awarded in" date={date} />
-
-              <MetaSeparator />
+              {date && (
+                <>
+                  <DateTerm label="Awarded in" date={date} />
+                  <MetaSeparator />
+                </>
+              )}
 
               <div>
                 <dt className="sr-only">Received in Grade</dt>
@@ -159,7 +163,12 @@ function CredentialRow({ entry }: { entry: CredentialRecognition }) {
   const { kind, credential, date } = entry
 
   return (
-    <div className="relative flex items-center pr-4 hover:bg-accent-muted">
+    <div
+      className={cn(
+        "relative flex items-center pr-4",
+        credential.credentialURL && "hover:bg-accent-muted"
+      )}
+    >
       <IconTile className="mx-4">
         {(credential.issuerIconName
           ? ISSUER_ICONS[credential.issuerIconName]
@@ -168,10 +177,14 @@ function CredentialRow({ entry }: { entry: CredentialRecognition }) {
 
       <div className="flex-1 space-y-1 border-l border-dashed border-line p-4">
         <h3 className="leading-snug font-medium text-balance">
-          <a href={credential.credentialURL} target="_blank" rel="noopener">
-            <span className="absolute inset-0" aria-hidden />
-            {credential.title}
-          </a>
+          {credential.credentialURL ? (
+            <a href={credential.credentialURL} target="_blank" rel="noopener">
+              <span className="absolute inset-0" aria-hidden />
+              {credential.title}
+            </a>
+          ) : (
+            credential.title
+          )}
         </h3>
 
         <dl className="flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
@@ -185,13 +198,18 @@ function CredentialRow({ entry }: { entry: CredentialRecognition }) {
             </dd>
           </div>
 
-          <MetaSeparator />
-
-          <DateTerm label="Issued on" date={date} />
+          {date && (
+            <>
+              <MetaSeparator />
+              <DateTerm label="Issued on" date={date} />
+            </>
+          )}
         </dl>
       </div>
 
-      <ArrowUpRightIcon className="size-4 text-muted-foreground" />
+      {credential.credentialURL && (
+        <ArrowUpRightIcon className="size-4 text-muted-foreground" />
+      )}
     </div>
   )
 }

@@ -5,7 +5,7 @@ import type { BuildInfo } from "@/lib/build-info"
 import { getBuildInfo, getStack } from "@/lib/build-info"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
-import { DmcaIcon, GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons"
+import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons"
 import { SiteFooterInteractiveLogotype } from "@/components/site-footer-brand"
 import { SOCIAL } from "@/features/portfolio/data/social-links"
 import { USER } from "@/features/portfolio/data/user"
@@ -13,10 +13,7 @@ import { USER } from "@/features/portfolio/data/user"
 // Imported here rather than through `@/config/site`, which client components
 // pull in, to keep the manifest out of client bundles.
 import packageJson from "../../package.json"
-// Precomputed by `pnpm registry:build`, so the count costs no registry import.
-import registryStats from "../../registry-stats.json"
-import { ChanhDaiMark } from "./chanhdai-mark"
-import { ChanhDaiSignature } from "./chanhdai-signature"
+import { SiteMark } from "./site-mark"
 
 const INSPIRED_BY = [
   "Tailwind CSS",
@@ -31,11 +28,11 @@ const INSPIRED_BY = [
 ]
 
 const OPENPANEL_URL =
-  "https://openpanel.dev?utm_source=chanhdai.com&utm_medium=referral&utm_campaign=footer"
+  "https://openpanel.dev?utm_source=ayazmirza54.in&utm_medium=referral&utm_campaign=footer"
 
 // Not derived from `SITE_INFO.url`: that follows `NEXT_PUBLIC_APP_URL` and
-// would read `ncdai.localhost` in dev.
-const SITE_TITLE = "chanhdai.com"
+// would read a localhost origin in dev.
+const SITE_TITLE = "ayazmirza54.in"
 
 const SITE_SUBTITLE = packageJson.description
 
@@ -83,7 +80,16 @@ export function SiteFooterCad() {
               <time dateTime={build.date}>{build.date}</time>
             </Field>
 
-            <Field label="Registry">{registryStats.total} items</Field>
+            <Field label="Forked from">
+              <a
+                className="link-underline"
+                href="https://chanhdai.com"
+                target="_blank"
+                rel="noopener"
+              >
+                chanhdai.com
+              </a>
+            </Field>
 
             <Field label="Deployed on">
               <span className="font-sans" aria-hidden>
@@ -177,7 +183,12 @@ export function SiteFooterCad() {
 
             <Field className="col-span-2" label="Approved by">
               <div className="flex h-full flex-col justify-end gap-2">
-                <ChanhDaiSignature className="ml-1 h-12 w-auto self-start text-blue-900 dark:text-foreground" />
+                <span
+                  className="ml-1 self-start font-handwritten text-4xl/12 text-blue-900 dark:text-foreground"
+                  aria-hidden
+                >
+                  {USER.displayName}
+                </span>
                 <span className="border-t border-line pt-2 font-sans text-sm/none font-medium tracking-wide uppercase">
                   {USER.displayName}
                 </span>
@@ -194,7 +205,7 @@ export function SiteFooterCad() {
             className="mr-auto text-muted-foreground transition-[color] hover:text-foreground"
             aria-label="Home"
           >
-            <ChanhDaiMark className="h-4" />
+            <SiteMark className="h-4" />
           </Link>
 
           <a
@@ -235,24 +246,6 @@ export function SiteFooterCad() {
             aria-label="LinkedIn Profile"
           >
             <LinkedInIcon className="size-4" />
-          </a>
-
-          <Separator
-            orientation="vertical"
-            className="data-vertical:h-4 data-vertical:self-center"
-          />
-
-          <a
-            className="flex items-center transition-[color] hover:text-foreground"
-            href={
-              process.env.NEXT_PUBLIC_DMCA_URL ||
-              "https://www.dmca.com/ProtectionPro.aspx"
-            }
-            target="_blank"
-            rel="noopener"
-            aria-label="DMCA.com Protection Status"
-          >
-            <DmcaIcon className="h-4 w-auto" />
           </a>
         </div>
       </div>

@@ -1,24 +1,22 @@
 {
-  "name": "chanhdai.com",
+  "name": "ayazmirza54.in",
   "version": "0.1.0",
-  "description": "A pixel-perfect dev portfolio and shadcn registry.",
-  "homepage": "https://chanhdai.com",
+  "description": "Portfolio of a Data Engineer working with Ab Initio, AWS and GCP.",
+  "homepage": "https://www.ayazmirza54.in",
   "license": "MIT",
   "author": {
-    "name": "Nguyen Chanh Dai",
-    "email": "dai@chanhdai.com",
-    "url": "https://github.com/ncdai"
+    "name": "Ayaz Mirza",
+    "url": "https://github.com/ayazmirza54"
   },
   "contributors": [
     {
       "name": "Nguyen Chanh Dai",
-      "email": "dai@chanhdai.com",
       "url": "https://github.com/ncdai"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ncdai/chanhdai.com.git"
+    "url": "git+https://github.com/ayazmirza54/ayazmirza-monochrome.git"
   },
   "scripts": {
     "dev": "next dev",
@@ -38,9 +36,8 @@
     "capture:sync": "bun run ./src/scripts/capture-sync.mts",
     "capture:cover": "bun run ./src/scripts/capture-cover.mts",
     "avatars:sync": "bun run ./src/scripts/sync-x-avatars.mts",
-    "numbers:sync": "bun run ./src/scripts/sync-numbers.mts",
     "craft:upload": "bun run ./src/scripts/craft-upload.mts",
-    "generate-libphonenumber-metadata": "libphonenumber-metadata-generator ./src/assets/libphonenumber.metadata.json --countries VN --extended",
+    "generate-libphonenumber-metadata": "libphonenumber-metadata-generator ./src/assets/libphonenumber.metadata.json --countries IN --extended",
     "upgrade:next": "npx @next/codemod@latest upgrade latest",
     "upgrade:tailwind": "npx @tailwindcss/upgrade@latest",
     "prepare": "husky"

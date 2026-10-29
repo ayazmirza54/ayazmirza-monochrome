@@ -32,13 +32,13 @@ import {
   ZapIcon,
 } from "lucide-react"
 
-import { ChanhDaiMark } from "@/components/chanhdai-mark"
 import {
   AppleIcon,
   ReactIcon,
   ReactWheelPickerIcon,
   XIcon,
 } from "@/components/icons"
+import { SiteMark } from "@/components/site-mark"
 
 const COMPONENT_ICONS: Record<string, React.ReactNode> = {
   "work-experience-component": <BriefcaseBusinessIcon />,
@@ -147,7 +147,7 @@ const COMPONENT_ICONS: Record<string, React.ReactNode> = {
   "testimonial-2": <IconBlockquote />,
   "line-nav": <IconBaselineDensitySmall />,
   "share-menu": <ShareIcon />,
-  "spotlight-logo": <ChanhDaiMark />,
+  "spotlight-logo": <SiteMark />,
   timescale: (
     // Icon designed by @ncdai
     <svg

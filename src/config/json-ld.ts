@@ -20,7 +20,7 @@ export const personJsonLd: Person = {
   name: USER.displayName,
   alternateName: [USER.username],
   identifier: USER.username,
-  image: USER.avatar,
+  image: new URL(USER.avatar, SITE_INFO.url).href,
   url: SITE_INFO.url,
   // Public profiles opt in via their `sameAs` flag (Knowledge Graph).
   sameAs: SOCIAL_LINKS.filter((link) => link.sameAs).map((link) => link.href),

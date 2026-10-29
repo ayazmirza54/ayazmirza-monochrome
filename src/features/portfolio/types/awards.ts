@@ -3,10 +3,10 @@ export type Award = {
   prize: string
   title: string
   /**
-   * Award date used for sorting and display.
+   * Award date used for sorting and display; undated awards sort last.
    * Format: "YYYY-MM" preferred (e.g., "2018-03"); "YYYY" is also accepted.
    */
-  date: string
+  date?: string
   /**
    * School level or context label (e.g., "Grade 10", "University", "Personal Project").
    */

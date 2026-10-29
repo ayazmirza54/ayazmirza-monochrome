@@ -5,7 +5,7 @@ export type AwardRecognition = {
   kind: "award"
   key: string
   /** Raw source date: "YYYY-MM" or "YYYY". */
-  date: string
+  date?: string
   award: Award
 }
 
@@ -13,7 +13,7 @@ export type CredentialRecognition = {
   kind: "certificate" | "trademark" | "copyright"
   key: string
   /** Raw source date: "YYYY-MM-DD". */
-  date: string
+  date?: string
   credential: Certification
 }
 

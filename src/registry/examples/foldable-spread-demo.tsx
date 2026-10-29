@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
-import { ChanhDaiMark } from "@/components/chanhdai-mark"
+import { SiteMark } from "@/components/site-mark"
 import {
   Foldable,
   FoldableCover,
@@ -125,7 +125,7 @@ function InnerView() {
 function Cover() {
   return (
     <div className="flex h-[35cqw] shrink-0 items-center justify-center border-b bg-muted">
-      <ChanhDaiMark className="h-[10cqw] w-[20cqw]" />
+      <SiteMark className="h-[10cqw] w-[20cqw]" />
     </div>
   )
 }

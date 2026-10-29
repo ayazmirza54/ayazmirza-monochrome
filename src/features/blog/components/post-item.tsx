@@ -17,6 +17,7 @@ export function PostItem({
   imageLoading?: ImageProps["loading"]
 }) {
   const Heading = headingAs ?? "h2"
+  const { externalUrl } = post.metadata
 
   return (
     <div className="group/post relative flex h-full flex-col gap-2 p-2 transition-[background-color] ease-out hover:bg-accent-muted">
@@ -38,10 +39,17 @@ export function PostItem({
 
       <div className="flex flex-col gap-1 p-2">
         <Heading className="text-lg/snug font-medium text-balance">
-          <Link href={`/blog/${post.slug}`}>
-            <span className="absolute inset-0" aria-hidden />
-            {post.metadata.title}
-          </Link>
+          {externalUrl ? (
+            <a href={externalUrl} target="_blank" rel="noopener">
+              <span className="absolute inset-0" aria-hidden />
+              {post.metadata.title}
+            </a>
+          ) : (
+            <Link href={`/blog/${post.slug}`}>
+              <span className="absolute inset-0" aria-hidden />
+              {post.metadata.title}
+            </Link>
+          )}
 
           {(post.metadata.new || post.metadata.updated) && (
             <span className="pointer-events-none ml-2 inline-block size-1.5 -translate-y-px rounded-full bg-info">
