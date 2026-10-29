@@ -9,11 +9,6 @@ import {
 } from "motion/react"
 
 import { gridSize, gridToRects, rectsToPath, textToGrid } from "@/lib/pixel-art"
-import {
-  Dimension,
-  DimensionExtensionLine,
-  DimensionLine,
-} from "@/components/dimension"
 
 const UNIT = 32
 const GRID = textToGrid("ayazmirza")
@@ -103,21 +98,6 @@ export function SiteFooterInteractiveLogotype() {
           aria-hidden
         />
       </div>
-
-      <LogotypeWidthDimension />
     </>
-  )
-}
-
-function LogotypeWidthDimension() {
-  return (
-    <Dimension className="relative container mx-auto h-8">
-      <DimensionExtensionLine className="top-1 bottom-0 left-0" />
-      <DimensionExtensionLine className="top-1 right-0 bottom-0" />
-
-      <DimensionLine className="absolute inset-x-0 bottom-0">
-        {VIEWBOX_WIDTH}
-      </DimensionLine>
-    </Dimension>
   )
 }
