@@ -30,7 +30,7 @@ export const USER: User = {
 - Skilled in automation with Shell scripting and Ansible, monitoring with Grafana, and data visualization with Power BI.
 - Google Cloud certified Associate Cloud Engineer; I build AI-powered side projects with Gemini and Claude on weekends.
 `,
-  avatar: "/images/avatar.png",
+  avatar: "/images/avatar.webp",
   ogImage: "/images/og-image.png",
   timeZone: "Asia/Kolkata",
   keywords: [
