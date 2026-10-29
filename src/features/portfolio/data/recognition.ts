@@ -11,6 +11,7 @@ import { INTELLECTUAL_PROPERTY } from "./intellectual-property"
  */
 export const RECOGNITION_PINNED_KEYS = [
   "Associate Cloud Engineer", // Google Cloud certification
+  "https://www.credly.com/badges/70568b01-d8b0-4b96-a649-4593790a60ad/public_url", // Gemini Enterprise Agent Development
 ]
 
 /**
