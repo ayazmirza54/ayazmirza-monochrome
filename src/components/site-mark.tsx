@@ -10,8 +10,8 @@ export const MARK_GRID: PixelGrid = [
 ]
 
 const MARK_UNIT = 64
-const MARK_SIZE = gridSize(MARK_GRID, MARK_UNIT)
-const MARK_PATH = rectsToPath(gridToRects(MARK_GRID, MARK_UNIT))
+export const MARK_SIZE = gridSize(MARK_GRID, MARK_UNIT)
+export const MARK_PATH = rectsToPath(gridToRects(MARK_GRID, MARK_UNIT))
 
 export function SiteMark(props: React.ComponentProps<"svg">) {
   return (
