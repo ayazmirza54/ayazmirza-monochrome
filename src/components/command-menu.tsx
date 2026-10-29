@@ -15,6 +15,7 @@ import {
   MonitorIcon,
   MoonStarIcon,
   RssIcon,
+  SquareTerminalIcon,
   SunMediumIcon,
   TextInitialIcon,
   TypeIcon,
@@ -226,7 +227,7 @@ export function CommandMenu({
   )
 
   const createThemeHandler = useCallback(
-    (theme: "light" | "dark" | "system") => () => {
+    (theme: "light" | "dark" | "dev" | "system") => () => {
       click()
       setOpen(false)
 
@@ -352,6 +353,14 @@ export function CommandMenu({
               >
                 <MoonStarIcon />
                 Dark
+              </CommandMenuItem>
+              <CommandMenuItem
+                keywords={["theme", "terminal", "crt"]}
+                onHighlight={handleCommandHighlight}
+                onSelect={createThemeHandler("dev")}
+              >
+                <SquareTerminalIcon />
+                Dev
               </CommandMenuItem>
               <CommandMenuItem
                 keywords={["theme"]}
