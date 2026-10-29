@@ -7,6 +7,11 @@ export type DocMetadata = {
    */
   image?: string
   /**
+   * Where the full post lives when it was published elsewhere (e.g. DEV).
+   * Post cards link straight to it, and the post page names it as canonical.
+   */
+  externalUrl?: string
+  /**
    * Category identifier, derived from the doc's content subfolder
    * (e.g. `content/components/*` → "components"). Not declared in frontmatter;
    * injected when docs are read. Used for filtering (see getDocsByCategory).

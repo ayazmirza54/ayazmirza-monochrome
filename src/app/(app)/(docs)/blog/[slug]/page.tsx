@@ -69,7 +69,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: postUrl,
+      canonical: doc.metadata.externalUrl ?? postUrl,
     },
     openGraph: {
       url: postUrl,

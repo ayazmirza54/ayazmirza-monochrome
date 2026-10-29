@@ -19,7 +19,7 @@ const intellectualProperty = RECOGNITION_BY_DATE.flatMap((entry) =>
 function formatAward({ award, date }: AwardRecognition) {
   const meta = [
     `Prize: ${award.prize}`,
-    `Date: ${date}`,
+    date && `Date: ${date}`,
     `Context: ${award.grade}`,
     award.referenceLink && `[Reference](${award.referenceLink})`,
   ]
@@ -31,12 +31,15 @@ function formatAward({ award, date }: AwardRecognition) {
 }
 
 function formatCredential({ credential, date }: CredentialRecognition) {
-  return `- [${credential.title}](${credential.credentialURL}): issued by ${credential.issuer} on ${date}`
+  const title = credential.credentialURL
+    ? `[${credential.title}](${credential.credentialURL})`
+    : credential.title
+  return `- ${title}: issued by ${credential.issuer}${date ? ` on ${date}` : ""}`
 }
 
 const content = `# Recognition
 
-> Awards, certifications, and the trademarks and copyrights registered under my name. Newest first within each group.
+> Awards and certifications. Newest first within each group.
 
 ## Awards (${awards.length})
 

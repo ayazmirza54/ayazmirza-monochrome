@@ -1,4 +1,4 @@
-import { MapPinIcon } from "lucide-react"
+import { FileUserIcon, MapPinIcon } from "lucide-react"
 
 import { USER } from "@/features/portfolio/data/user"
 
@@ -51,6 +51,20 @@ export function Overview() {
         <EmailItem emailB64={USER.emailB64} />
 
         <PhoneItem phoneNumberB64={USER.phoneNumberB64} />
+
+        <IntroItem>
+          <IntroItemIcon>
+            <FileUserIcon />
+          </IntroItemIcon>
+          <IntroItemContent>
+            <IntroItemLink
+              href="/AyazMirzaResume.pdf"
+              aria-label="Resume (PDF)"
+            >
+              Resume (PDF)
+            </IntroItemLink>
+          </IntroItemContent>
+        </IntroItem>
 
         {/* <IntroItem>
           <IntroItemIcon>

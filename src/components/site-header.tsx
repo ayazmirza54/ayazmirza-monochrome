@@ -3,14 +3,10 @@ import Link from "next/link"
 
 import { MAIN_NAV } from "@/config/site"
 import { Separator } from "@/components/ui/separator"
-import { ChanhDaiMark } from "@/components/chanhdai-mark"
 import { NavDesktop } from "@/components/nav-desktop"
 import { NavItemGitHub } from "@/components/nav-item-github"
+import { SiteMark } from "@/components/site-mark"
 import { ThemeToggle } from "@/components/theme-toggle"
-import blocks from "@/registry/__blocks__.json"
-import { BOOKMARKS } from "@/features/bookmark/data"
-import { sortBookmarksNewestFirst } from "@/features/bookmark/lib/sort"
-import type { BookmarkPreview } from "@/features/bookmark/types"
 import { getAllDocs } from "@/features/doc/data/documents"
 import type { DocPreview } from "@/features/doc/types/document"
 
@@ -30,19 +26,12 @@ export function SiteHeader() {
     category: doc.metadata.category,
   }))
 
-  const bookmarkPreviews: BookmarkPreview[] = sortBookmarksNewestFirst(
-    BOOKMARKS
-  ).map((bookmark) => ({
-    title: bookmark.title,
-    url: bookmark.url,
-  }))
-
   return (
     <header className="sticky top-0 z-50 h-(--header-height) max-w-screen overflow-x-clip bg-background px-2 pt-1">
       <div className="screen-line-top screen-line-bottom mx-auto flex h-full items-center gap-2 border-x border-x-line pr-2 pl-4 group-has-data-[slot=layout-wide]/layout:container after:z-1 sm:gap-4 md:max-w-3xl">
         <BrandContextMenu>
           <Link href="/" aria-label="Home">
-            <ChanhDaiMark className="h-6 shrink-0" />
+            <SiteMark className="h-6 shrink-0" />
           </Link>
         </BrandContextMenu>
 
@@ -55,12 +44,7 @@ export function SiteHeader() {
             orientation="vertical"
             className="mr-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
           />
-          <CommandMenu
-            docs={docPreviews}
-            blocks={blocks}
-            bookmarks={bookmarkPreviews}
-            enabledHotkeys
-          />
+          <CommandMenu docs={docPreviews} enabledHotkeys />
           <Separator
             orientation="vertical"
             className="mx-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"

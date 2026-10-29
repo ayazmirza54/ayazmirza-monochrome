@@ -6,9 +6,7 @@ import { JSON_LD_ID } from "@/config/json-ld"
 import { JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl, cn } from "@/lib/utils"
 import { FloatingCarbonAds } from "@/components/floating-carbon-ads"
-import { Blocks } from "@/features/portfolio/components/blocks"
 import { Blog } from "@/features/portfolio/components/blog"
-import { Components } from "@/features/portfolio/components/components"
 import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { FrameWidthDimension } from "@/features/portfolio/components/frame-width-dimension"
@@ -21,10 +19,7 @@ import { Projects } from "@/features/portfolio/components/projects"
 import { Recognition } from "@/features/portfolio/components/recognition"
 import { SeparatorHeightDimension } from "@/features/portfolio/components/separator-height-dimension"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
-import { Sponsors } from "@/features/portfolio/components/sponsors"
-import { SponsorsCarousel } from "@/features/portfolio/components/sponsors-carousel"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
-import { Testimonials } from "@/features/portfolio/components/testimonials"
 import { USER } from "@/features/portfolio/data/user"
 
 export const metadata: Metadata = {
@@ -54,15 +49,7 @@ export default function HomePage() {
           <Separator />
 
           <Hello />
-          <SponsorsCarousel />
           <Numbers />
-          <Testimonials />
-          <Separator />
-
-          <Components />
-          <Separator />
-
-          <Blocks />
           <Separator />
 
           <Blog />
@@ -81,9 +68,6 @@ export default function HomePage() {
           <Separator />
 
           <Recognition />
-          <Separator />
-
-          <Sponsors />
         </div>
       </div>
     </>

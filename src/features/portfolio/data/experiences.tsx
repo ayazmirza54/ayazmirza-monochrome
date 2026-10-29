@@ -1,269 +1,88 @@
-import {
-  BriefcaseBusinessIcon,
-  CodeXmlIcon,
-  DraftingCompassIcon,
-  LightbulbIcon,
-} from "lucide-react"
+import { CodeXmlIcon, DatabaseIcon } from "lucide-react"
 
 import type { Experience } from "@/features/portfolio/types/experiences"
 
 export const EXPERIENCES: Experience[] = [
   {
-    id: "shadcncraft",
-    companyName: "shadcncraft",
-    companyLogo: "https://assets.chanhdai.com/images/companies/shadcncraft.svg",
-    companyWebsite: "https://shadcncraft.com?atp=ncdai",
-    location: "Melbourne, Australia",
-    locationType: "Remote",
+    id: "wipro",
+    companyName: "Wipro",
+    companyWebsite: "https://www.wipro.com",
+    location: "Greater Noida, India",
     positions: [
       {
-        id: "1",
-        title: "Design Engineer",
+        id: "2",
+        title: "Data Engineer, Ab Initio Platform Team",
         employmentPeriod: {
-          start: "01.2026",
+          start: "11.2025",
         },
-        employmentType: "Full-time",
-        icon: <CodeXmlIcon />,
-        description: `- Design and build Pro components/blocks, from Figma to production-ready React.
-- Build and maintain the @shadcncraft registry.
-- Build and enhance features for the marketing website.
-- Build and maintain Storybook documentation.
-- Design and build the Upgrade Bundle feature.`,
+        icon: <DatabaseIcon />,
+        description: `Client: Aldermore Bank, a UK-based financial services group.
+- Manage the group data platform end-to-end as part of the Ab Initio platform team.
+- Administer a hybrid infrastructure that integrates AWS (EC2, Redshift, CloudWatch) with Ab Initio Control Center, GDE, Metadata Hub Portal, and Authorization Gateway.
+- Monitor Ab Initio jobs running on AWS, resolving pipeline failures proactively to meet banking SLAs.
+- Handle platform administration, including OS user provisioning and Ab Initio license key installation and management.
+- Author Redshift SQL scripts for release management, promoting data artifacts and configurations from UAT to Production.`,
         skills: [
-          "TypeScript",
-          "Next.js",
-          "Tailwind CSS",
-          "shadcn/registry",
-          "Figma",
-          "Polar",
-          "Storybook",
-          "Design",
+          "Ab Initio",
+          "Control Center",
+          "GDE",
+          "Metadata Hub",
+          "Authorization Gateway",
+          "Amazon EC2",
+          "Amazon Redshift",
+          "Amazon CloudWatch",
+          "SQL",
         ],
         isExpanded: true,
       },
-    ],
-    isCurrentEmployer: true,
-  },
-  {
-    id: "quaric",
-    companyName: "Quaric",
-    companyLogo: "https://assets.chanhdai.com/images/companies/quaric.svg",
-    companyWebsite: "https://quaric.com",
-    location: "Can Tho, Viet Nam",
-    locationType: "Remote",
-    positions: [
-      {
-        id: "2",
-        title: "Design Engineer",
-        employmentPeriod: {
-          start: "03.2024",
-        },
-        employmentType: "Part-time",
-        icon: <CodeXmlIcon />,
-        description: `- Created Quaric Brand Identity.
-- Created the Quaric Design System to standardize design practices and accelerate development.
-
-In-house Project: [Quaric Website](https://quaric.com)
-- Designed the UI/UX for Quaric Website, delivering a seamless experience.
-- Developed online ordering to streamline purchases.
-- Integrated VNPAY-QR for secure transactions.
-- Registered the e-commerce site with [online.gov.vn](http://online.gov.vn/website/chi-tiet-115855) for compliance.
-
-In-house Project: [ZaDark](https://zadark.com)
-- Build and maintain ZaDark.com with Docusaurus, integrating AdSense.
-- Develop and maintain the ZaDark extension for Zalo Web on Chrome, Safari, Edge, and Firefox — with 20k+ active users via Chrome Web Store (as of Sep 2025).`,
-        skills: [
-          "Next.js",
-          "Strapi",
-          "Auth0",
-          "VNPAY-QR",
-          "Docker",
-          "NGINX",
-          "Google Cloud",
-          "Docusaurus",
-          "Extension",
-          "UI/UX Design",
-          "UX Writing",
-          "Design System",
-          "Brand Design",
-          "Figma",
-        ],
-      },
       {
         id: "1",
-        title: "Founder",
+        title: "Senior Consultant",
         employmentPeriod: {
-          start: "03.2024",
+          start: "11.2019",
+          end: "10.2025",
         },
-        employmentType: "Part-time",
-        icon: <LightbulbIcon />,
-        skills: ["Business Ownership", "Business Law", "Business Tax"],
+        icon: <DatabaseIcon />,
+        description: `Client: an Indonesian telecom operator.
+- Developed and optimized Ab Initio ETL pipelines in GDE to process large-scale telecom data and deliver actionable business insights.
+- Designed and scheduled Ab Initio graphs and jobs through Control Center, ensuring reliable orchestration and SLA adherence.
+- Built SQL-based validation and reconciliation checks to ensure data accuracy and quality across the pipeline.
+- Built Grafana dashboards for key telecom metrics, ETL job performance, and system health.
+- Automated ETL job monitoring with Unix shell scripting, reducing manual intervention by 50% and improving operational efficiency by 30%.
+- Automated Splunk log processing with shell scripts, significantly reducing manual log analysis.
+- Implemented auto-restart and recovery scripts with Ansible and shell to minimize downtime for critical Ab Initio jobs.
+- Acted as L2 ETL & DevOps engineer, mentoring L1 team members and contributing to HLD/LLD documentation and UAT.`,
+        skills: [
+          "Ab Initio",
+          "GDE",
+          "Control Center",
+          "SQL",
+          "Unix Shell",
+          "Ansible",
+          "Grafana",
+          "Splunk",
+          "Power BI",
+        ],
       },
     ],
     isCurrentEmployer: true,
   },
   {
-    id: "simplamo",
-    companyName: "Simplamo",
-    companyLogo: "https://assets.chanhdai.com/images/companies/simplamo.webp",
-    location: "Ho Chi Minh City, Viet Nam",
-    locationType: "On-site",
+    id: "cosmo-infosolutions",
+    companyName: "Cosmo Infosolutions",
+    location: "Lucknow, India",
     positions: [
       {
-        id: "2",
-        title: "Senior Frontend Developer",
-        employmentPeriod: {
-          start: "10.2022",
-          end: "01.2026",
-        },
-        employmentType: "Full-time",
-        icon: <CodeXmlIcon />,
-        description: `- Built Tree & Gantt views features to improve goal organization, visibility, and progress tracking.
-- Developed [AI Chat](https://help.simplamo.com/features/simplamo-ai/ai-chat/guide_simplamo_ai_chat?ref=IN-926722) and [AI Assistant](https://help.simplamo.com/features/simplamo-ai/ai-expert/aiexpert-rockdiscribe?ref=IN-926722) features.
-- Developed [Whiteboards](https://help.simplamo.com/features/whiteboard/overview?ref=IN-926722) with real-time collaboration.
-- Built and maintained the [Zalo Mini App](https://zalo.me/s/1736112917405511258/) for Simplamo with seamless integration.
-- Developed interactive chart and analytics widgets for the [Dashboard](https://help.simplamo.com/features/dashboard/overview) to enhance data visualization.
-- Developed and maintained core features to enhance functionality and user experience.
-- Ensured UI/UX consistency and adherence to standards.
-- Implemented robust frontend solutions for web and mobile platforms.
-- Analyzed technical capabilities and provided optimal solutions.`,
-        skills: [
-          "TypeScript",
-          "Next.js",
-          "React Native",
-          "MobX",
-          "MobX-State-Tree",
-          "Tailwind CSS",
-          "Dify",
-          "Zalo Mini App",
-          "Agile",
-        ],
-      },
-      {
         id: "1",
-        title: "UI Lead",
+        title: "Frontend Web Developer",
         employmentPeriod: {
-          start: "10.2022",
-          end: "01.2026",
+          start: "06.2019",
+          end: "10.2019",
         },
-        employmentType: "Full-time",
-        icon: <DraftingCompassIcon />,
-        description: `- Ensured UI/UX consistency and high-quality standards.
-- Designed intuitive, user-focused interfaces aligned with business goals.
-- Defined and established a cohesive UI style for Simplamo.`,
-        skills: ["Creativity", "UI/UX Design", "Figma"],
-      },
-    ],
-  },
-  {
-    id: "tungtung",
-    companyName: "Tung Tung",
-    companyLogo: "https://assets.chanhdai.com/images/companies/tungtung.webp",
-    location: "Ho Chi Minh City, Viet Nam",
-    locationType: "Hybrid",
-    positions: [
-      {
-        id: "3",
-        title: "Web Developer",
-        employmentPeriod: {
-          start: "2020",
-          end: "2022",
-        },
-        employmentType: "Full-time",
-        description: `- Built a scalable design system for consistency and efficiency.
-- Built a complex rich-text editor based on ProseMirror and Slate for customizable content creation.
-- Integrated APIs with the Backend Team to enhance functionality.`,
         icon: <CodeXmlIcon />,
-        skills: ["React", "Redux", "Storybook", "Lerna", "Agile"],
-      },
-      {
-        id: "2",
-        title: "Mobile Developer",
-        employmentPeriod: {
-          start: "2019",
-          end: "2020",
-        },
-        employmentType: "Full-time",
-        description: `- Rebuilt the app with React Native for better UX and performance.
-- Integrated MoMo and in-app purchases for seamless payments.
-- Optimized deployment for staging and production.
-- Published on App Store and Google Play, ensuring compliance.`,
-        icon: <CodeXmlIcon />,
-        skills: [
-          "React Native",
-          "Redux",
-          "MoMo Payment API",
-          "App Store",
-          "Google Play Store",
-          "App Center",
-          "Agile",
-        ],
-      },
-      {
-        id: "1",
-        title: "UI/UX Designer",
-        employmentPeriod: {
-          start: "2018",
-          end: "2019",
-        },
-        employmentType: "Full-time",
-        description: `- Designed a Landing Page for enterprise clients.
-- Redesigned the Online Quiz Platform for a modern look on web and mobile.
-- Redesigned the Pricing interface for individual customers.
-- Enhanced UX by improving usability, navigation, and user flow.`,
-        icon: <DraftingCompassIcon />,
-        skills: ["UI/UX Design", "Sketch"],
-      },
-    ],
-  },
-  {
-    id: "freelance",
-    companyName: "Freelance",
-    companyIcon: <BriefcaseBusinessIcon strokeWidth={1.8} />,
-    positions: [
-      {
-        id: "2",
-        title: "Full-stack Developer",
-        employmentPeriod: {
-          start: "2018",
-          end: "2020",
-        },
-        employmentType: "Part-time",
-        description: `- Built an order management website with real-time delivery tracking.
-- Developed an e-commerce site for bird’s nest products.
-- Created a map to display monitoring station data.
-- Designed a customizable WordPress landing page.`,
-        icon: <CodeXmlIcon />,
-        skills: [
-          "Laravel",
-          "React",
-          "Express.js",
-          "Socket.IO",
-          "MongoDB",
-          "Firebase",
-          "WordPress",
-          "Docker",
-          "NGINX",
-        ],
-      },
-      {
-        id: "1",
-        title: "Graphic & UI/UX Designer",
-        employmentPeriod: {
-          start: "2018",
-          end: "2019",
-        },
-        employmentType: "Part-time",
-        description: "Designed logos, posters, ads, and UI.",
-        icon: <DraftingCompassIcon />,
-        skills: [
-          "Creativity",
-          "UI/UX Design",
-          "Graphic Design",
-          "Sketch",
-          "Adobe Photoshop",
-          "Adobe Illustrator",
-        ],
+        description: `- Built landing pages with HTML, CSS, JavaScript, and React, designed to capture attention and boost user interaction.
+- Created responsive layouts that work well on desktop and mobile, with attention to layout, color, and typography.`,
+        skills: ["HTML", "CSS", "JavaScript", "React", "Responsive Design"],
       },
     ],
   },

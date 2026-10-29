@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import type { ReactNode } from "react"
 
-import { ChanhDaiMark } from "@/components/chanhdai-mark"
+import { SiteMark } from "@/components/site-mark"
 import {
   Foldable,
   FoldableCover,
@@ -57,7 +57,7 @@ function CardFrame({ children }: { children?: ReactNode }) {
   return (
     <div className="flex size-full flex-col p-5">
       <div className="flex items-start justify-between">
-        <ChanhDaiMark className="h-5 w-10" />
+        <SiteMark className="h-5 w-10" />
         <span className="font-mono text-xs text-muted-foreground">
           @{PROFILE.username}
         </span>

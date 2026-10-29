@@ -1,17 +1,17 @@
 import { USER } from "@/features/portfolio/data/user"
 
-import { ChanhDaiMarkIsometric } from "./chanhdai-mark-isometric"
 import { DiameterDimension } from "./diameter-dimension"
 import { FlipSentences } from "./flip-sentences"
 import { HandwrittenArrow, HandwrittenNote } from "./handwritten-note"
 import { PronounceMyName } from "./pronounce-my-name"
+import { SiteMarkIsometric } from "./site-mark-isometric"
 import { VerifiedIcon } from "./verified-icon"
 
 export function ProfileHeader() {
   return (
     <div className="screen-line-bottom grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] overflow-y-clip border-x border-x-line after:z-1">
       <figure className="relative col-span-2 p-2 sm:col-span-1 sm:col-start-2 sm:p-4">
-        <ChanhDaiMarkIsometric />
+        <SiteMarkIsometric />
 
         {/* w-36 needs ~1088px before the gutter can hold it without clipping,
             and the mark ignores coarse pointers, so nothing to annotate there. */}
@@ -34,13 +34,13 @@ export function ProfileHeader() {
             <div className="relative z-10 size-30 rounded-full min-[24rem]:size-32 sm:size-40">
               <img
                 className="block size-full rounded-[inherit] object-cover select-none dark:hidden"
-                src={USER.avatarSketch}
-                alt="Avatar with sketch style in light mode"
+                src={USER.avatarSketch ?? USER.avatar}
+                alt={`${USER.displayName}'s avatar`}
               />
               <img
                 className="hidden size-full rounded-[inherit] object-cover select-none dark:block"
                 src={USER.avatar}
-                alt="Avatar in dark mode"
+                alt={`${USER.displayName}'s avatar`}
               />
               <div className="pointer-events-none absolute inset-0 rounded-[inherit] inset-ring-1 inset-ring-foreground dark:hidden" />
 
@@ -63,10 +63,7 @@ export function ProfileHeader() {
       <div className="flex flex-col">
         <div className="z-1 mt-auto border-t border-line">
           <div className="flex -translate-x-px items-center gap-2 pl-4">
-            <h1
-              className="-translate-y-px text-[2rem]/none font-medium tracking-tight"
-              lang="vi"
-            >
+            <h1 className="-translate-y-px text-[2rem]/none font-medium tracking-tight">
               {USER.displayName}
             </h1>
 

@@ -1,65 +1,48 @@
 import type { User } from "@/features/portfolio/types/user"
 
 export const USER: User = {
-  firstName: "Chánh Đại",
-  lastName: "Nguyễn",
-  displayName: "Chánh Đại",
-  username: "ncdai",
-  gender: "male",
-  pronouns: "he/him",
-  bio: "Creating with code. Small details matter.",
+  firstName: "Ayaz",
+  lastName: "Mirza",
+  displayName: "Ayaz Mirza",
+  username: "ayazmirza54",
+  bio: "Data Engineer building reliable ETL pipelines on Ab Initio, AWS and GCP.",
   flipSentences: [
-    "Creating with code. Small details matter.",
-    "Design Engineer.",
-    "Open source contributor.",
-    "I own a vintage iPhone.",
+    "Data Engineer building reliable ETL pipelines.",
+    "Ab Initio · AWS · GCP.",
+    "Google Cloud Associate Cloud Engineer.",
+    "Shipping AI side projects on weekends.",
   ],
-  address: "Ho Chi Minh City, Viet Nam",
-  phoneNumberB64: "Kzg0Nzc3ODg4MTQ4", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
-  emailB64: "ZGFpQGNoYW5oZGFpLmNvbQ==", // base64 encoded
-  website: "https://chanhdai.com",
-  jobTitle: "Design Engineer",
+  address: "Lucknow, India",
+  phoneNumberB64: "KzkxOTg4OTAxNzc3NA==", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
+  emailB64: "YXlhem1pcnphNTRAZ21haWwuY29t", // base64 encoded
+  website: "https://www.ayazmirza54.in",
+  jobTitle: "Data Engineer",
   jobs: [
     {
-      title: "Design Engineer",
-      company: "shadcncraft",
-      website: "https://shadcncraft.com?atp=ncdai",
-      experienceId: "shadcncraft",
+      title: "Data Engineer",
+      company: "Wipro",
+      website: "https://www.wipro.com",
+      experienceId: "wipro",
     },
-    // {
-    //   title: "Founder",
-    //   company: "Quaric",
-    //   website: "https://quaric.com",
-    //   experienceId: "quaric",
-    // },
   ],
-  about: `- I’m Chánh Đại (call me Dai) — a Design Engineer with 5+ years of experience, known for pixel-perfect execution and obsessive attention to detail.
-- Passionate about exploring new technologies and turning ideas into reality through polished, thoughtfully crafted projects.
-- Creator of [chanhdai.com](https://github.com/ncdai/chanhdai.com) (2.4K stars), [React Wheel Picker](https://react-wheel-picker.chanhdai.com) (70K+ weekly downloads, ▲ Vercel OSS Program), and [ZaDark](https://zadark.com) (80K+ downloads, 30K+ users) — peak metrics.
+  about: `- Data Engineer with 6+ years of experience designing, building, and optimizing high-volume ETL pipelines using Ab Initio and SQL.
+- Currently on the Ab Initio platform team for [Aldermore Bank](https://www.aldermore.co.uk) (UK) at Wipro, running a hybrid platform on AWS (EC2, Redshift, CloudWatch).
+- Skilled in automation with Shell scripting and Ansible, monitoring with Grafana, and data visualization with Power BI.
+- Google Cloud certified Associate Cloud Engineer; I build AI-powered side projects with Gemini and Claude on weekends.
 `,
-  avatar: "https://assets.chanhdai.com/images/chanhdai-avatar-ghibli.webp",
-  avatarSketch: "https://assets.chanhdai.com/images/avatar-sketch.webp",
-  avatarVariants: {
-    lightOff: "https://assets.chanhdai.com/images/avatar-light-off.webp",
-    lightOn: "https://assets.chanhdai.com/images/avatar-light-on.webp",
-    darkOff: "https://assets.chanhdai.com/images/avatar-dark-off.webp",
-    darkOn: "https://assets.chanhdai.com/images/avatar-dark-on.webp",
-  },
-  ogImage:
-    "https://assets.chanhdai.com/images/screenshot-og-image-dark.png?t=1778602757",
-  namePronunciationUrl: "https://assets.chanhdai.com/audio/chanhdai.mp3",
-  timeZone: "Asia/Ho_Chi_Minh",
+  avatar: "/images/avatar.png",
+  ogImage: "/images/og-image.png",
+  timeZone: "Asia/Kolkata",
   keywords: [
-    "ncdai",
-    "nguyenchanhdai",
-    "nguyen chanh dai",
-    "chanhdai",
-    "chanh dai",
-    "iamncdai",
-    "quaric",
-    "zadark",
-    "nguyễn chánh đại",
-    "chánh đại",
+    "ayazmirza54",
+    "ayaz mirza",
+    "ayaz",
+    "data engineer",
+    "ab initio",
+    "etl developer",
+    "aws",
+    "gcp",
+    "lucknow",
   ],
-  dateCreated: "2023-10-20", // YYYY-MM-DD
+  dateCreated: "2026-10-29", // YYYY-MM-DD
 }

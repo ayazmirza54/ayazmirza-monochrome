@@ -1,158 +1,178 @@
-import { ChanhDaiMark } from "@/components/chanhdai-mark"
 import {
-  QuaricIcon,
-  ReactWheelPickerIcon,
-  ZaDarkIcon,
-} from "@/components/icons"
+  ActivityIcon,
+  BrushIcon,
+  CodeXmlIcon,
+  DatabaseZapIcon,
+  FileTextIcon,
+  FilmIcon,
+  GaugeIcon,
+  GraduationCapIcon,
+  PenLineIcon,
+  ServerCogIcon,
+  SparklesIcon,
+  SquareTerminalIcon,
+} from "lucide-react"
 
 import type { Project } from "../types/projects"
 
+// Periods run from each repository's creation to its last push on GitHub.
 export const PROJECTS: Project[] = [
   {
-    id: "react-wheel-picker",
-    title: "React Wheel Picker",
+    id: "draftbuddy",
+    title: "DraftBuddy",
     period: {
-      start: "05.2025",
+      start: "03.2026",
+      end: "03.2026",
     },
-    link: "https://react-wheel-picker.chanhdai.com",
-    skills: [
-      "Open Source",
-      "React",
-      "TypeScript",
-      "Monorepo",
-      "Turborepo",
-      "pnpm-workspace",
-      "Package Publishing",
-      "NPM Registry",
-      "GitHub Actions",
-    ],
-    description: `iOS-like wheel picker for React with smooth inertia scrolling and infinite loop support. / Backed by [▲ Vercel OSS Program](https://vercel.com/blog/summer-2025-oss-program#react-wheel-picker)
-- Natural touch scrolling with smooth inertia, mouse drag and scroll for desktop
-- Infinite loop scrolling
-- Unstyled core for complete style customization
-- Full keyboard navigation and type-ahead search
-`,
-    icon: <ReactWheelPickerIcon />,
+    link: "https://draftbuddyy.vercel.app",
+    skills: ["JavaScript", "AI", "Vercel"],
+    description: `Your buddy for better drafts. Turns rough notes in English, Hindi, or Hinglish into polished, platform-ready copy for a Teams message, a Slack ping, an email, or a LinkedIn post.
+- [Source on GitHub](https://github.com/ayazmirza54/draftbuddy)`,
+    icon: <PenLineIcon />,
     isExpanded: true,
   },
   {
-    id: "chanhdaidotcom",
-    title: "chanhdai.com",
+    id: "text-to-content-ai",
+    title: "Text to Content AI",
     period: {
-      start: "01.2025",
+      start: "12.2024",
+      end: "12.2024",
     },
-    link: "https://github.com/ncdai/chanhdai.com",
-    skills: [
-      "Open Source",
-      "Next.js 16",
-      "Tailwind CSS v4",
-      "Radix UI",
-      "Base UI",
-      "Motion",
-      "shadcn/ui",
-      "shadcn registry",
-      "Vercel",
-    ],
-    description: "A pixel-perfect dev portfolio and shadcn registry.",
-    icon: <ChanhDaiMark />,
+    link: "https://texttocontent.vercel.app",
+    skills: ["TypeScript", "Gemini API", "Vercel"],
+    description: `AI-powered tool that converts text into content, using the Gemini API to generate content from the input text.
+- [Source on GitHub](https://github.com/ayazmirza54/text-to-content-ai)`,
+    icon: <SparklesIcon />,
   },
   {
-    id: "quaricdotcom",
-    title: "quaric.com",
+    id: "intellisketch",
+    title: "IntelliSketch",
     period: {
-      start: "03.2024",
-      end: "07.2025",
+      start: "09.2024",
+      end: "10.2024",
     },
-    link: "https://quaric.com",
-    skills: [
-      "Company Project",
-      "Next.js 15",
-      "Tailwind CSS v3",
-      "shadcn/ui",
-      "Strapi 5",
-      "VNPAY-QR",
-      "Docker",
-      "Docker Compose",
-      "NGINX",
-    ],
-    icon: <QuaricIcon />,
+    link: "https://intellisketch.vercel.app",
+    skills: ["JavaScript", "Gemini API", "Vercel"],
+    description: `AI-powered drawing app that uses the Google Gemini API to interpret and solve mathematical sketches and graphical problems in real time.
+- [Source on GitHub](https://github.com/ayazmirza54/intellisketch)
+- [Read the write-up](https://dev.to/ayazmirza54/intellisketch-ai-powered-drawing-tool-3i8e)`,
+    icon: <BrushIcon />,
   },
   {
-    id: "zadark",
-    title: "ZaDark",
+    id: "text-code-utils-ai",
+    title: "Text/Code Utils.AI",
     period: {
-      start: "01.2022",
+      start: "01.2023",
+      end: "09.2024",
     },
-    link: "https://zadark.com",
-    skills: [
-      "Pet Project",
-      "Open Source",
-      "Browser Extension",
-      "CLI",
-      "Docusaurus 3",
-    ],
-    description: `ZaDark adds Dark Mode, anti-peeking, customizable fonts, backgrounds, and more to Zalo Web and PC.
-- Earned 10M+ VND in net sales from a paid Safari Extension*
-- 80k+ downloads on SourceForge* (awarded Community Leader badge by SourceForge)
-- 30k+ active users via Chrome Web Store*
-- Bronze Medal — 10th Design, Manufacturing, and Application Award 2022
-
-<p class="text-muted-foreground">* Peak metrics.</p>
-`,
-    icon: <ZaDarkIcon />,
+    link: "https://text-code-util-aiprod.vercel.app",
+    skills: ["JavaScript", "OpenAI API", "Gemini API"],
+    description: `AI-enhanced text analysis and code generation tool. Started on the OpenAI API and later migrated to Google Gemini.
+- [Source on GitHub](https://github.com/ayazmirza54/text-code-util.aiprod)
+- [Read the write-up](https://dev.to/ayazmirza54/text-and-code-utilities-app-using-openai-api-4m13)`,
+    icon: <CodeXmlIcon />,
   },
   {
-    id: "penphy",
-    title: "Penphy",
+    id: "chat2pdf",
+    title: "Chat2PDF",
     period: {
-      start: "01.2019",
-      end: "08.2019",
+      start: "05.2024",
+      end: "10.2024",
     },
-    link: "https://www.youtube.com/watch?v=EdU7rUO-UA4",
-    skills: ["Startup Project", "JavaScript", "React Native"],
-    description: "2nd Prize — Business Startup Competition 2019",
+    link: "https://chat2pdf-using-gemini.streamlit.app",
+    skills: ["Python", "Gemini API", "LangChain", "Streamlit"],
+    description: `AI-powered app for conversational PDF interaction using Gemini and LangChain.
+- [Source on GitHub](https://github.com/ayazmirza54/chat2pdf-using-gemini)`,
+    icon: <FileTextIcon />,
   },
   {
-    id: "unlimitedstudy",
-    title: "UnlimitedStudy",
+    id: "unixbot",
+    title: "UnixBot",
     period: {
-      start: "01.2017",
-      end: "08.2018",
+      start: "12.2024",
+      end: "08.2026",
     },
-    link: "https://muctim.tuoitre.vn/cong-cu-ho-tro-viec-day-va-hoc-55107.htm",
-    skills: [
-      "National Competition",
-      "Creative Software",
-      "PHP",
-      "Laravel 4",
-      "MySQL",
-      "jQuery",
-      "Bootstrap 3",
-    ],
-    description: `UnlimitedStudy is a website that provides teaching and learning support tools for teachers and students.
-- 3rd Prize — National Science and Engineering Fair 2018 (ViSEF)
-- 3rd Prize — National Young Informatics Contest 2018
-- Reached 7k+ users, mainly high school students in Can Tho City
-- Pilot implemented in high schools across Can Tho City with English quizzes, supervised by English subject specialists from the Can Tho City Department of Education and Training`,
+    link: "https://unix-bot.streamlit.app",
+    skills: ["Python", "Gemini API", "Streamlit"],
+    description: `Chatbot that helps craft and explain Unix shell commands, with responses generated by the Gemini API.
+- [Source on GitHub](https://github.com/ayazmirza54/unixbot)`,
+    icon: <SquareTerminalIcon />,
   },
   {
-    id: "study-english",
-    title: "Study English",
+    id: "querysmith",
+    title: "QuerySmith",
     period: {
-      start: "11.2016",
-      end: "12.2017",
+      start: "12.2024",
+      end: "08.2026",
     },
-    link: "https://www.youtube.com/watch?v=OYgugvjqU4A",
-    skills: [
-      "National Competition",
-      "Creative Software",
-      "PHP",
-      "Laravel 4",
-      "MySQL",
-    ],
-    description: `Study English is a free, mobile-friendly website for high school English learning, offering vocabulary, quizzes, listening practice, and more.
-- Consolation Prize — National Youth and Children’s Creativity Contest 2016
-- 1st Prize — Can Tho City Youth and Children’s Creativity Contest 2016
-- Consolation Prize — Can Tho City Young Informatics Contest 2016`,
+    link: "https://query-smith.streamlit.app",
+    skills: ["Python", "Gemini API", "SQL", "Streamlit"],
+    description: `Chatbot that generates SQL queries from plain-language questions, powered by the Gemini API.
+- [Source on GitHub](https://github.com/ayazmirza54/chat-with-db)`,
+    icon: <DatabaseZapIcon />,
+  },
+  {
+    id: "ec2-manager-tui",
+    title: "EC2 Manager TUI",
+    period: {
+      start: "02.2025",
+      end: "02.2025",
+    },
+    link: "https://github.com/ayazmirza54/ec2-manager-tui",
+    skills: ["Python", "AWS SDK for Python", "Amazon EC2", "TUI"],
+    description:
+      "Terminal UI to manage EC2 instances, using the AWS SDK for Python to talk to the AWS API.",
+    icon: <ServerCogIcon />,
+  },
+  {
+    id: "keep-alive-ec2",
+    title: "Keep Alive EC2 Script",
+    period: {
+      start: "04.2025",
+      end: "04.2025",
+    },
+    link: "https://github.com/ayazmirza54/pingservice",
+    skills: ["Shell", "Amazon EC2"],
+    description: "Keeps an EC2 instance alive by pinging it every 10 minutes.",
+    icon: <ActivityIcon />,
+  },
+  {
+    id: "system-metrics-logging",
+    title: "System Metrics Logging Script",
+    period: {
+      start: "05.2024",
+      end: "05.2024",
+    },
+    link: "https://github.com/ayazmirza54/system-metrics-monitoring-script",
+    skills: ["Shell", "Unix", "PostgreSQL"],
+    description:
+      "Unix shell script that logs CPU and memory usage to a PostgreSQL database hosted on Render.",
+    icon: <GaugeIcon />,
+  },
+  {
+    id: "studysensei",
+    title: "StudySensei",
+    period: {
+      start: "06.2024",
+      end: "06.2024",
+    },
+    link: "https://studysensei.vercel.app",
+    skills: ["React", "Tailwind CSS", "Gemini API"],
+    description: `Quiz generator powered by the Gemini API.
+- [Source on GitHub](https://github.com/ayazmirza54/studysensei)`,
+    icon: <GraduationCapIcon />,
+  },
+  {
+    id: "movie-finder",
+    title: "Movie Finder",
+    period: {
+      start: "09.2022",
+      end: "02.2023",
+    },
+    link: "https://movie-finder-lake-six.vercel.app",
+    skills: ["JavaScript", "HTML", "CSS", "TMDB API"],
+    description: `Movie search app built on The Movie Database API.
+- [Source on GitHub](https://github.com/ayazmirza54/movie-finder)`,
+    icon: <FilmIcon />,
   },
 ]

@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 import { NextResponse } from "next/server"
 import { decodeEmail, decodePhoneNumber } from "@/utils/string"
 import sharp from "sharp"
@@ -38,21 +40,10 @@ export async function GET() {
   })
 }
 
-async function getVCardPhoto(url: string) {
+async function getVCardPhoto(src: string) {
   try {
-    const res = await fetch(url)
-
-    if (!res.ok) {
-      return null
-    }
-
-    const buffer = Buffer.from(await res.arrayBuffer())
-    if (buffer.length === 0) {
-      return null
-    }
-
-    const contentType = res.headers.get("Content-Type") || ""
-    if (!contentType.startsWith("image/")) {
+    const buffer = await readImage(src)
+    if (!buffer || buffer.length === 0) {
       return null
     }
 
@@ -66,6 +57,22 @@ async function getVCardPhoto(url: string) {
   } catch {
     return null
   }
+}
+
+// Root-relative paths live in `public/`, which a static build cannot fetch
+// from the site itself.
+async function readImage(src: string) {
+  if (src.startsWith("/")) {
+    return readFile(path.join(process.cwd(), "public", src))
+  }
+
+  const res = await fetch(src)
+  const contentType = res.headers.get("Content-Type") || ""
+  if (!res.ok || !contentType.startsWith("image/")) {
+    return null
+  }
+
+  return Buffer.from(await res.arrayBuffer())
 }
 
 async function convertImageToJpeg(imageBuffer: Buffer): Promise<Buffer> {

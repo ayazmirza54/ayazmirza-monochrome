@@ -10,13 +10,13 @@ import { INTELLECTUAL_PROPERTY } from "./intellectual-property"
  * the fold instead of sinking under newer but lesser entries.
  */
 export const RECOGNITION_PINNED_KEYS = [
-  "1b4db7eb-4057-5ddf-91e0-36dec72071f5", // Claude for Open Source Program
-  "05e1c61b-6dc1-11f0-8000-679dd01e0504", // Vercel OSS Program
+  "Associate Cloud Engineer", // Google Cloud certification
 ]
 
 /**
  * Awards, certifications, and IP registrations merged into one list, newest
- * first. Date ties keep source order (awards, then certifications, then IP).
+ * first, with undated entries last. Ties keep source order (awards, then
+ * certifications, then IP).
  */
 export const RECOGNITION_BY_DATE: RecognitionEntry[] = [
   ...AWARDS.map((award) => ({
@@ -27,7 +27,7 @@ export const RECOGNITION_BY_DATE: RecognitionEntry[] = [
   })),
   ...CERTIFICATIONS.map((credential) => ({
     kind: "certificate" as const,
-    key: credential.credentialURL,
+    key: credential.credentialURL ?? credential.title,
     date: credential.issueDate,
     credential,
   })),
@@ -37,11 +37,14 @@ export const RECOGNITION_BY_DATE: RecognitionEntry[] = [
       credential.issuerIconName === "copyright"
         ? ("copyright" as const)
         : ("trademark" as const),
-    key: credential.credentialURL,
+    key: credential.credentialURL ?? credential.title,
     date: credential.issueDate,
     credential,
   })),
-].sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+].sort((a, b) => {
+  if (!a.date || !b.date) return Number(!a.date) - Number(!b.date)
+  return compareDesc(new Date(a.date), new Date(b.date))
+})
 
 /** Home page order: pinned entries first, then the rest newest first. */
 export const RECOGNITION = pinFirst(
