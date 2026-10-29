@@ -9,6 +9,7 @@ import type {
   UseSoundOptions,
   UseSoundReturn,
 } from "@/lib/soundcn/sound-types"
+import { useSoundEnabled } from "@/hooks/use-sound-enabled"
 
 export function useSound(
   sound: SoundAsset,
@@ -34,7 +35,8 @@ export function useSound(
   const bufferRef = useRef<AudioBuffer | null>(null)
 
   const shouldReduceMotion = useReducedMotion()
-  const soundEnabled = _soundEnabled && !shouldReduceMotion
+  const [siteSoundEnabled] = useSoundEnabled()
+  const soundEnabled = _soundEnabled && siteSoundEnabled && !shouldReduceMotion
 
   useEffect(() => {
     let cancelled = false

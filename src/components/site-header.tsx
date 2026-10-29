@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator"
 import { NavDesktop } from "@/components/nav-desktop"
 import { NavItemGitHub } from "@/components/nav-item-github"
 import { SiteMark } from "@/components/site-mark"
+import { SoundToggle } from "@/components/sound-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { getAllDocs } from "@/features/doc/data/documents"
 import type { DocPreview } from "@/features/doc/types/document"
@@ -54,6 +55,7 @@ export function SiteHeader() {
             orientation="vertical"
             className="mx-2 data-vertical:h-5 data-vertical:self-center"
           />
+          <SoundToggle />
           <ThemeToggle />
         </div>
 

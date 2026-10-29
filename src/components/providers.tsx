@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes"
 import { Toaster } from "@/components/ui/toast"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts"
+import { LinkClickSound } from "@/components/link-click-sound"
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -28,6 +29,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <TooltipProvider>{children}</TooltipProvider>
 
           <KeyboardShortcuts />
+          <LinkClickSound />
         </ProgressProvider>
 
         <Toaster />
