@@ -5,10 +5,12 @@
 @import "./typeset.css";
 @import "./scroll-fade-effect.css";
 @import "./style-preview.css";
+@import "./dev-theme.css";
 
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* Dev mode is a dark theme, so it shares every `dark:` style. */
+@custom-variant dark (&:where(.dark, .dark *, .dev, .dev *));
 
 @custom-variant supports-timeline-scroll {
   @supports (animation-timeline: scroll()) {
@@ -394,7 +396,8 @@
   --fade-bottom-height: --spacing(24);
 }
 
-.dark {
+.dark,
+.dev {
   /* zinc-950 */
   --background: oklch(0.141 0.005 285.823);
 

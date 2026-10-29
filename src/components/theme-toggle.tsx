@@ -1,5 +1,6 @@
 "use client"
 
+import { SquareTerminalIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useHotkeys } from "react-hotkeys-hook"
 
@@ -17,6 +18,8 @@ import {
 import { Button } from "./ui/button"
 import { Kbd } from "./ui/kbd"
 
+const THEMES = ["light", "dark", "dev"] as const
+
 export function ThemeToggle() {
   const { resolvedTheme, systemTheme, setTheme } = useTheme()
 
@@ -25,15 +28,14 @@ export function ThemeToggle() {
   const [click] = useClickSound()
 
   const switchTheme = () => {
-    const next = resolvedTheme === "dark" ? "light" : "dark"
+    const current = THEMES.indexOf(
+      (resolvedTheme ?? "light") as (typeof THEMES)[number]
+    )
+    const next = THEMES[(current + 1) % THEMES.length]
 
     click()
     setTheme(next === systemTheme ? "system" : next)
-    setMetaColor(
-      resolvedTheme === "dark"
-        ? META_THEME_COLORS.light
-        : META_THEME_COLORS.dark
-    )
+    setMetaColor(META_THEME_COLORS[next])
   }
 
   useHotkeys("d", () => switchTheme())
@@ -58,7 +60,12 @@ export function ThemeToggle() {
               className="hidden [html.light_&]:block"
               aria-hidden
             /> */}
-            <DarkSideIcon className="size-3.5" />
+            {/* Swapped with CSS: the theme is unknown during SSR. */}
+            <SquareTerminalIcon
+              className="hidden size-4 [html.dev_&]:block"
+              aria-hidden
+            />
+            <DarkSideIcon className="size-3.5 [html.dev_&]:hidden" />
           </Button>
         }
       />
