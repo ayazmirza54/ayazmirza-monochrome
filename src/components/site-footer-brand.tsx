@@ -1,34 +1,11 @@
-import { gridSize, gridToRects, rectsToPath, textToGrid } from "@/lib/pixel-art"
-
-const UNIT = 32
-const GRID = textToGrid("ayazmirza")
-
-// 1px of padding on every side keeps the 2px outline inside the viewBox.
-const VIEWBOX_WIDTH = gridSize(GRID, UNIT).width + 2
-const VIEWBOX_HEIGHT = gridSize(GRID, UNIT).height + 2
-const LOGOTYPE_PATH = rectsToPath(gridToRects(GRID, UNIT, { x: 1, y: 1 }))
+import { NameIsometric } from "@/features/portfolio/components/site-mark-isometric"
 
 export function SiteFooterInteractiveLogotype() {
   return (
     <div className="screen-line-bottom after:z-1 after:bg-foreground/15">
-      <div className="flex w-full items-center justify-center py-6 sm:py-8">
-        <svg
-          className="container size-full"
-          viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Ayaz Mirza"
-        >
-          <path className="fill-foreground" d={LOGOTYPE_PATH} />
-          {/* Outlines every construction rectangle, so the pixel grid shows
-              through the fill. */}
-          <path
-            className="stroke-background/40"
-            d={LOGOTYPE_PATH}
-            strokeWidth="2"
-          />
-        </svg>
+      <div className="mx-auto border-x border-x-line p-4 group-has-data-[slot=layout-wide]/layout:container sm:px-8 sm:py-10 md:max-w-3xl">
+        <NameIsometric />
+        <span className="sr-only">Ayaz Mirza</span>
       </div>
 
       <div
