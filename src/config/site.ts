@@ -1,12 +1,13 @@
 import type { Route } from "next"
 
 import type { NavItem } from "@/types/nav"
+import { SITE_URL } from "@/lib/utils"
 import { SOCIAL } from "@/features/portfolio/data/social-links"
 import { USER } from "@/features/portfolio/data/user"
 
 export const SITE_INFO = {
   name: USER.displayName,
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://www.ayazmirza54.in",
+  url: SITE_URL,
   ogImage: USER.ogImage,
   description: USER.bio,
   keywords: USER.keywords,
