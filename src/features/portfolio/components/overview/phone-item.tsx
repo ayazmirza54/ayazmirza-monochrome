@@ -3,12 +3,12 @@
 import { useId } from "react"
 import { copyToClipboardWithEvent } from "@/utils/copy"
 import { decodePhoneNumber, formatPhoneNumber } from "@/utils/string"
-import { useTiks } from "@rexa-developer/tiks/react"
 import { PhoneIcon } from "lucide-react"
 import { useHotkeys } from "react-hotkeys-hook"
 
 import { trackEvent } from "@/lib/events"
 import { useIsClient } from "@/hooks/use-is-client"
+import { useUiTiks } from "@/hooks/use-ui-tiks"
 import { toast } from "@/components/ui/toast"
 import { CopyButton } from "@/components/copy-button"
 
@@ -30,7 +30,7 @@ export function PhoneItem({ phoneNumberB64 }: PhoneItemProps) {
   const phoneNumberDecoded = decodePhoneNumber(phoneNumberB64)
   const phoneNumberFormatted = formatPhoneNumber(phoneNumberDecoded)
 
-  const { success } = useTiks()
+  const { success } = useUiTiks()
 
   useHotkeys("shift+p", () => {
     copyToClipboardWithEvent(phoneNumberDecoded, {

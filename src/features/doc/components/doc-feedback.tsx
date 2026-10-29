@@ -8,12 +8,12 @@ import {
   useRef,
   useState,
 } from "react"
-import { useTiks } from "@rexa-developer/tiks/react"
 import { useAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { CheckIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-react"
 
 import { trackEvent } from "@/lib/events"
+import { useUiTiks } from "@/hooks/use-ui-tiks"
 import { Button } from "@/components/ui/button"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Textarea } from "@/components/ui/textarea"
@@ -66,7 +66,7 @@ export function DocFeedback({ category, slug }: DocFeedbackProps) {
   // only appear right after voting, not for a returning visitor.
   const [justVoted, setJustVoted] = useState(false)
 
-  const { success } = useTiks()
+  const { success } = useUiTiks()
 
   const [noteState, sendNote, isSending] = useActionState(
     async (previousState: DocFeedbackState, formData: FormData) => {

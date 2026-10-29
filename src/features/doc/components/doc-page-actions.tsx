@@ -3,12 +3,12 @@
 "use client"
 
 import { useMemo, useRef, useState } from "react"
-import { useTiks } from "@rexa-developer/tiks/react"
 import { IconCheck, IconCopy, IconX } from "@tabler/icons-react"
 import { ChevronDownIcon } from "lucide-react"
 
 import { SOURCE_CODE_GITHUB_URL } from "@/config/site"
 import type { CopyState } from "@/hooks/use-copy-to-clipboard"
+import { useUiTiks } from "@/hooks/use-ui-tiks"
 import { Button } from "@/components/ui/button"
 import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group"
 import {
@@ -36,7 +36,7 @@ export function LLMCopyButton({ markdownUrl }: { markdownUrl: string }) {
   const [isCopying, setIsCopying] = useState(false)
   const operationRef = useRef(false)
 
-  const { success, error } = useTiks()
+  const { success, error } = useUiTiks()
 
   const handleCopy = async () => {
     if (operationRef.current) return

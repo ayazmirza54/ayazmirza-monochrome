@@ -1,5 +1,6 @@
 let audioContext: AudioContext | null = null
-const bufferCache = new Map<string, AudioBuffer>()
+// Promises, not buffers, so components mounting together share one decode.
+const bufferCache = new Map<string, Promise<AudioBuffer>>()
 
 export function getAudioContext(): AudioContext {
   if (!audioContext) {
@@ -8,7 +9,7 @@ export function getAudioContext(): AudioContext {
   return audioContext
 }
 
-export async function decodeAudioData(dataUri: string): Promise<AudioBuffer> {
+export function decodeAudioData(dataUri: string): Promise<AudioBuffer> {
   const cached = bufferCache.get(dataUri)
   if (cached) return cached
 
@@ -20,9 +21,11 @@ export async function decodeAudioData(dataUri: string): Promise<AudioBuffer> {
     bytes[i] = binaryString.charCodeAt(i)
   }
 
-  const audioBuffer = await ctx.decodeAudioData(bytes.buffer.slice(0))
-  bufferCache.set(dataUri, audioBuffer)
-  return audioBuffer
+  const decoding = ctx.decodeAudioData(bytes.buffer.slice(0))
+  bufferCache.set(dataUri, decoding)
+  // A failed decode should be retried by the next caller, not cached.
+  decoding.catch(() => bufferCache.delete(dataUri))
+  return decoding
 }
 
 export interface PlaySoundOptions {

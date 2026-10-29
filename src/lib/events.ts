@@ -28,6 +28,7 @@ const eventSchema = z.object({
     "carbon_ads_close",
     "doc_feedback",
     "bookmark_click",
+    "toggle_sound",
   ]),
   // declare type AllowedPropertyValues = string | number | boolean | null
   properties: z

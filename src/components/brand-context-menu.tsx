@@ -1,9 +1,9 @@
 "use client"
 
 import { copyText } from "@/utils/copy"
-import { useTiks } from "@rexa-developer/tiks/react"
 import { ArrowUpRight, Type } from "lucide-react"
 
+import { useUiTiks } from "@/hooks/use-ui-tiks"
 import {
   ContextMenu,
   ContextMenuContent,
@@ -17,7 +17,7 @@ import { getMarkSVG, SiteMark } from "./site-mark"
 import { getWordmarkSVG } from "./site-wordmark"
 
 export function BrandContextMenu({ children }: { children: React.ReactNode }) {
-  const { success } = useTiks()
+  const { success } = useUiTiks()
 
   return (
     <ContextMenu>

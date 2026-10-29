@@ -3,7 +3,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { copyToClipboardWithEvent } from "@/utils/copy"
 import { useRouter } from "@bprogress/next/app"
-import { useTiks } from "@rexa-developer/tiks/react"
 import {
   AwardIcon,
   BoxIcon,
@@ -26,6 +25,7 @@ import { useHotkeys } from "react-hotkeys-hook"
 import { trackEvent } from "@/lib/events"
 import { useClickSound } from "@/hooks/soundcn/use-click-sound"
 import { useMutationObserver } from "@/hooks/use-mutation-observer"
+import { useUiTiks } from "@/hooks/use-ui-tiks"
 import {
   CommandDialog,
   CommandEmpty,
@@ -164,7 +164,7 @@ export function CommandMenu({
 
   const [click] = useClickSound()
 
-  const { success: tiksSuccess } = useTiks()
+  const { success: tiksSuccess } = useUiTiks()
 
   useHotkeys(
     "mod+k, slash",
