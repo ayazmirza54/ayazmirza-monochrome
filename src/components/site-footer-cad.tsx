@@ -1,7 +1,6 @@
 import Link from "next/link"
 
 import { LICENSE, SOURCE_CODE_GITHUB_URL } from "@/config/site"
-import type { BuildInfo } from "@/lib/build-info"
 import { getBuildInfo, getStack } from "@/lib/build-info"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
@@ -72,23 +71,8 @@ export function SiteFooterCad() {
               </a>
             </Field>
 
-            <Field label="Build">
-              <BuildValue build={build} />
-            </Field>
-
             <Field label="Date">
               <time dateTime={build.date}>{build.date}</time>
-            </Field>
-
-            <Field label="Forked from">
-              <a
-                className="link-underline"
-                href="https://chanhdai.com"
-                target="_blank"
-                rel="noopener"
-              >
-                chanhdai.com
-              </a>
             </Field>
 
             <Field label="Deployed on">
@@ -181,7 +165,7 @@ export function SiteFooterCad() {
               </ol>
             </Field>
 
-            <Field className="col-span-2" label="Approved by">
+            <Field className="col-span-2 md:col-span-4" label="Approved by">
               <div className="flex h-full flex-col justify-end gap-2">
                 <span
                   className="ml-1 self-start font-handwritten text-4xl/12 text-blue-900 dark:text-foreground"
@@ -255,36 +239,6 @@ export function SiteFooterCad() {
       <div className="h-(--fade-bottom-height)" />
       <div className="pb-[env(safe-area-inset-bottom,0)]" />
     </footer>
-  )
-}
-
-function BuildValue({ build }: { build: BuildInfo }) {
-  if (!build.commitShortSha) {
-    return <span className="text-muted-foreground">unavailable</span>
-  }
-
-  return (
-    <>
-      {build.commitUrl ? (
-        <a
-          className="link-underline"
-          href={build.commitUrl}
-          target="_blank"
-          rel="noopener"
-        >
-          {build.commitShortSha}
-        </a>
-      ) : (
-        build.commitShortSha
-      )}
-
-      {build.environment !== "production" && (
-        <span className="text-muted-foreground">
-          {" "}
-          ({build.environment === "development" ? "local" : build.environment})
-        </span>
-      )}
-    </>
   )
 }
 
