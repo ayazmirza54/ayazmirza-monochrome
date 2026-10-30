@@ -58,16 +58,16 @@ export default function HomePage() {
           <TechStack />
           <Separator />
 
-          <Blog />
-          <Separator />
-
-          <Education />
+          <Recognition />
           <Separator />
 
           <Projects />
           <Separator />
 
-          <Recognition />
+          <Blog />
+          <Separator />
+
+          <Education />
         </div>
       </div>
     </>
