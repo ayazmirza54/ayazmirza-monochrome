@@ -85,22 +85,22 @@ const PORTFOLIO_LINKS: CommandLinkItem[] = [
     icon: <TextInitialIcon />,
   },
   {
-    title: "Stack",
-    href: "/#stack",
-    kind: "page",
-    icon: <LayersIcon />,
-  },
-  {
     title: "Experience",
     href: "/#experience",
     kind: "page",
     icon: <BriefcaseBusinessIcon />,
   },
   {
-    title: "Education",
-    href: "/#education",
+    title: "Stack",
+    href: "/#stack",
     kind: "page",
-    icon: <GraduationCapIcon />,
+    icon: <LayersIcon />,
+  },
+  {
+    title: "Recognition",
+    href: "/#recognition",
+    kind: "page",
+    icon: <AwardIcon />,
   },
   {
     title: "Projects",
@@ -109,10 +109,10 @@ const PORTFOLIO_LINKS: CommandLinkItem[] = [
     icon: <BoxIcon />,
   },
   {
-    title: "Recognition",
-    href: "/#recognition",
+    title: "Education",
+    href: "/#education",
     kind: "page",
-    icon: <AwardIcon />,
+    icon: <GraduationCapIcon />,
   },
 ]
 
