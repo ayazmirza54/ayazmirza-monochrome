@@ -12,7 +12,6 @@ import { USER } from "@/features/portfolio/data/user"
 // Imported here rather than through `@/config/site`, which client components
 // pull in, to keep the manifest out of client bundles.
 import packageJson from "../../package.json"
-import { Signature } from "./signature"
 import { SiteMark } from "./site-mark"
 
 const INSPIRED_BY = [
@@ -168,7 +167,12 @@ export function SiteFooterCad() {
 
             <Field className="col-span-2 md:col-span-4" label="Approved by">
               <div className="flex h-full flex-col justify-end gap-2">
-                <Signature className="ml-1 h-24 w-auto self-start text-blue-900 dark:text-foreground" />
+                <span
+                  className="ml-1 self-start font-handwritten text-4xl/12 text-blue-900 dark:text-foreground"
+                  aria-hidden
+                >
+                  {USER.displayName}
+                </span>
                 <span className="border-t border-line pt-2 font-sans text-sm/none font-medium tracking-wide uppercase">
                   {USER.displayName}
                 </span>
