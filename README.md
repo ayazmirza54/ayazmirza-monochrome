@@ -1,8 +1,8 @@
-# ayazmirza54.in
+# ayazmirza.dev
 
 Portfolio of Ayaz Mirza, a Data Engineer building reliable ETL pipelines on Ab Initio, AWS and GCP.
 
-→ Live site: [ayazmirza54.in](https://www.ayazmirza54.in)
+→ Live site: [ayazmirza.dev](https://ayazmirza.dev)
 
 ## Overview
 

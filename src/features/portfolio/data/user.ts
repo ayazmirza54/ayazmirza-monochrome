@@ -15,7 +15,7 @@ export const USER: User = {
   address: "Lucknow, India",
   phoneNumberB64: "KzkxOTg4OTAxNzc3NA==", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
   emailB64: "YXlhem1pcnphNTRAZ21haWwuY29t", // base64 encoded
-  website: "https://www.ayazmirza54.in",
+  website: "https://ayazmirza.dev",
   jobTitle: "Data Engineer",
   jobs: [
     {
