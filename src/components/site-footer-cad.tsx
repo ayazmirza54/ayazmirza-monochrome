@@ -31,7 +31,7 @@ const OPENPANEL_URL =
 
 // Not derived from `SITE_INFO.url`: that follows `NEXT_PUBLIC_APP_URL` and
 // would read a localhost origin in dev.
-const SITE_TITLE = "ayazmirza54.in"
+const SITE_TITLE = "ayazmirza.dev"
 
 const SITE_SUBTITLE = packageJson.description
 

@@ -1,9 +1,9 @@
 import { Markdown } from "@/components/markdown"
-import { HelloTitle } from "@/features/portfolio/components/hello-title"
 import {
   Panel,
   PanelContent,
   PanelHeader,
+  PanelTitle,
 } from "@/features/portfolio/components/panel"
 import { USER } from "@/features/portfolio/data/user"
 
@@ -14,7 +14,9 @@ export function Hello() {
     <Panel id={ID} className="screen-line-bottom-none">
       <PanelHeader>
         <h2 className="sr-only">About</h2>
-        <HelloTitle />
+        <PanelTitle as="div" aria-hidden>
+          Hello, world
+        </PanelTitle>
       </PanelHeader>
 
       <PanelContent>
