@@ -52,13 +52,13 @@ export default function HomePage() {
           <Numbers />
           <Separator />
 
-          <Blog />
+          <Experiences />
           <Separator />
 
           <TechStack />
           <Separator />
 
-          <Experiences />
+          <Blog />
           <Separator />
 
           <Education />

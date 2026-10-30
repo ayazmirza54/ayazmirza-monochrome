@@ -1,4 +1,4 @@
-import { FileUserIcon, MapPinIcon } from "lucide-react"
+import { DownloadIcon, FileUserIcon, MapPinIcon } from "lucide-react"
 
 import { USER } from "@/features/portfolio/data/user"
 
@@ -58,10 +58,13 @@ export function Overview() {
           </IntroItemIcon>
           <IntroItemContent>
             <IntroItemLink
+              className="inline-flex items-center gap-1.5"
               href="/AyazMirzaResume.pdf"
-              aria-label="Resume (PDF)"
+              download="Ayaz_Mirza_Resume.pdf"
+              aria-label="Download resume (PDF)"
             >
               Resume (PDF)
+              <DownloadIcon className="size-3.5" aria-hidden />
             </IntroItemLink>
           </IntroItemContent>
         </IntroItem>
