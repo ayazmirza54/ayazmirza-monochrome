@@ -46,5 +46,5 @@ export const SOURCE_CODE_GITHUB_URL =
   "https://github.com/ayazmirza54/ayazmirza-monochrome"
 
 export const UTM_PARAMS = {
-  utm_source: "ayazmirza54.in",
+  utm_source: "ayazmirza.dev",
 }

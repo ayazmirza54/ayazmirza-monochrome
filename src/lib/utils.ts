@@ -14,7 +14,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_APP_URL ||
   (VERCEL_PRODUCTION_HOST
     ? `https://${VERCEL_PRODUCTION_HOST}`
-    : "https://www.ayazmirza54.in")
+    : "https://ayazmirza.dev")
 
 export function absoluteUrl(path: string) {
   return `${SITE_URL}${path}`

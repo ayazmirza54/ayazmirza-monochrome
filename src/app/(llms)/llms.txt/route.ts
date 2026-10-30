@@ -3,7 +3,7 @@ import { getBlogPosts } from "@/features/doc/data/documents"
 
 const allPosts = getBlogPosts()
 
-const content = `# ayazmirza54.in
+const content = `# ayazmirza.dev
 
 > Portfolio of Ayaz Mirza, a Data Engineer building reliable ETL pipelines on Ab Initio, AWS and GCP.
 
