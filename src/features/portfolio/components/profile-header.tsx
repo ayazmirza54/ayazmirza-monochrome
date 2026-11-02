@@ -31,18 +31,21 @@ export function ProfileHeader() {
       <div className="flex flex-col sm:row-span-2 sm:row-start-1">
         <div className="screen-line-top mt-auto shrink-0 border-r border-line">
           <div className="-mx-px my-0 flex outline-none">
-            <div className="relative z-10 size-30 rounded-full min-[24rem]:size-32 sm:size-40">
-              <img
-                className="block size-full rounded-[inherit] object-cover select-none dark:hidden"
-                src={USER.avatarSketch ?? USER.avatar}
-                alt={`${USER.displayName}'s avatar`}
-              />
-              <img
-                className="hidden size-full rounded-[inherit] object-cover select-none dark:block"
-                src={USER.avatar}
-                alt={`${USER.displayName}'s avatar`}
-              />
-              <div className="pointer-events-none absolute inset-0 rounded-[inherit] inset-ring-1 inset-ring-foreground dark:hidden" />
+            {/* Double rule: two rings separated by background gaps, all inside
+                the measured diameter so the photo never touches either edge. */}
+            <div className="relative z-10 size-30 rounded-full border border-foreground/80 bg-background p-1 min-[24rem]:size-32 sm:size-40 dark:border-foreground/45">
+              <div className="relative size-full rounded-full border border-foreground/80 p-0.5 dark:border-foreground/45">
+                <img
+                  className="block size-full rounded-[inherit] object-cover select-none dark:hidden"
+                  src={USER.avatarSketch ?? USER.avatar}
+                  alt={`${USER.displayName}'s avatar`}
+                />
+                <img
+                  className="hidden size-full rounded-[inherit] object-cover select-none dark:block"
+                  src={USER.avatar}
+                  alt={`${USER.displayName}'s avatar`}
+                />
+              </div>
 
               {/* The label assumes size-40 (sm+); the gutter fits it from lg. */}
               <DiameterDimension
