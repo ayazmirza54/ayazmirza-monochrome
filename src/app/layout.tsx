@@ -82,20 +82,16 @@ export const metadata: Metadata = {
     images: [SITE_INFO.ogImage],
   },
   icons: {
+    // The SVG stays sharp at any size in Chrome, Edge, and Firefox; the
+    // .ico covers Safari and older browsers.
     icon: [
       {
         url: "/images/favicon.ico",
         sizes: "32x32",
       },
       {
-        url: "/images/favicon-16x16.png",
-        sizes: "16x16",
-        type: "image/png",
-      },
-      {
-        url: "/images/favicon-32x32.png",
-        sizes: "32x32",
-        type: "image/png",
+        url: "/images/favicon-isometric.svg",
+        type: "image/svg+xml",
       },
     ],
     apple: {
