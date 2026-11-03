@@ -68,8 +68,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: SITE_INFO.ogImage,
-        width: 1200,
-        height: 630,
+        // Rendered at 2x so it stays sharp on high-density screens.
+        width: 2400,
+        height: 1260,
         alt: SITE_INFO.name,
       },
     ],
