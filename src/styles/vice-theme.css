@@ -1,0 +1,134 @@
+/*
+ * Vice mode: Vice City at dusk. Like dev mode it inherits every dark-mode
+ * token (`.vice` also matches the `dark:` variant) and only recolors and
+ * restyles, so layout and content stay identical across every mode.
+ */
+
+html.vice {
+  --vice-pink: oklch(0.7 0.25 355);
+  --vice-orange: oklch(0.8 0.16 55);
+  --vice-teal: oklch(0.85 0.13 195);
+
+  --background: oklch(0.17 0.06 305);
+  --foreground: oklch(0.95 0.03 60);
+
+  --primary: var(--vice-pink);
+  --primary-foreground: oklch(0.17 0.06 305);
+
+  --secondary: oklch(0.25 0.07 305);
+  --secondary-foreground: oklch(0.95 0.03 60);
+
+  --muted: oklch(0.25 0.07 305);
+  --muted-foreground: oklch(0.78 0.08 320);
+
+  --card: oklch(0.21 0.07 305);
+  --card-foreground: oklch(0.95 0.03 60);
+
+  --popover: oklch(0.21 0.07 305);
+  --popover-foreground: oklch(0.95 0.03 60);
+
+  --accent: oklch(0.27 0.09 310);
+  --accent-muted: color-mix(in oklab, var(--accent) 35%, transparent);
+  --accent-foreground: oklch(0.95 0.03 60);
+
+  --border: oklch(0.36 0.1 320);
+  --input: oklch(0.95 0.03 60 / 0.15);
+  --ring: var(--vice-pink);
+
+  --info: var(--vice-teal);
+  --success: var(--vice-teal);
+  --link: var(--vice-orange);
+
+  --dimension: color-mix(in oklab, oklch(0.55 0.15 330) 70%, var(--background));
+  --dimension-foreground: oklch(0.65 0.15 330);
+
+  --surface: oklch(0.21 0.07 305);
+  --surface-foreground: oklch(0.95 0.03 60);
+
+  --code-number: oklch(0.6 0.12 320);
+  --code-highlight: oklch(0.7 0.25 355 / 0.1);
+
+  --selection: var(--vice-pink);
+  --selection-foreground: oklch(0.17 0.06 305);
+
+  --sidebar: oklch(0.21 0.07 305);
+  --sidebar-foreground: oklch(0.95 0.03 60);
+  --sidebar-primary: var(--vice-pink);
+  --sidebar-primary-foreground: oklch(0.17 0.06 305);
+  --sidebar-accent: oklch(0.27 0.09 310);
+  --sidebar-accent-foreground: oklch(0.95 0.03 60);
+  --sidebar-border: oklch(0.95 0.03 60 / 12%);
+  --sidebar-ring: var(--vice-pink);
+
+  --chart-1: var(--vice-pink);
+  --chart-2: var(--vice-orange);
+  --chart-3: var(--vice-teal);
+  --chart-4: oklch(0.55 0.15 320);
+  --chart-5: oklch(0.38 0.1 310);
+  --chart-background: oklch(0.17 0.06 305);
+  --chart-foreground: oklch(0.95 0.03 60);
+  --chart-foreground-muted: oklch(0.78 0.08 320);
+  --chart-crosshair: oklch(0.55 0.15 330);
+  --chart-tooltip-background: oklch(0.21 0.07 305);
+  --chart-tooltip-foreground: oklch(0.95 0.03 60);
+  --chart-tooltip-muted: oklch(0.78 0.08 320);
+
+  /* Components use zinc directly in places; a dusk ramp keeps them on-theme. */
+  --color-zinc-50: oklch(0.97 0.03 340);
+  --color-zinc-100: oklch(0.93 0.05 340);
+  --color-zinc-200: oklch(0.88 0.08 340);
+  --color-zinc-300: oklch(0.82 0.12 345);
+  --color-zinc-400: oklch(0.72 0.17 350);
+  --color-zinc-500: oklch(0.6 0.17 340);
+  --color-zinc-600: oklch(0.48 0.14 325);
+  --color-zinc-700: oklch(0.38 0.11 315);
+  --color-zinc-800: oklch(0.29 0.09 308);
+  --color-zinc-900: oklch(0.22 0.07 305);
+  --color-zinc-950: oklch(0.17 0.06 305);
+
+  color-scheme: dark;
+}
+
+/* A sunset glow over the top of the page, fading into the night. */
+html.vice body {
+  background:
+    radial-gradient(
+      120% 45% at 50% -8%,
+      oklch(0.72 0.18 40 / 0.35),
+      transparent 70%
+    ),
+    radial-gradient(
+      90% 40% at 50% -5%,
+      oklch(0.66 0.24 355 / 0.3),
+      transparent 75%
+    ),
+    var(--background);
+  background-attachment: fixed;
+}
+
+/* Section titles in the display face, neon pink. */
+html.vice [data-slot="panel-title"] {
+  font-family: var(--font-vice), var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--vice-pink);
+  text-shadow: 0 0 18px color-mix(in oklab, var(--vice-pink) 45%, transparent);
+}
+
+/* Page headings (the name on the home page) get the sunset gradient. */
+html.vice h1 {
+  font-family: var(--font-vice), var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--vice-pink), var(--vice-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The footer's isometric name lights up in neon pink. */
+html.vice footer .fill-foreground {
+  fill: var(--vice-pink);
+}

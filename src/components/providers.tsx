@@ -18,7 +18,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         enableColorScheme
         storageKey="theme"
         defaultTheme="system"
-        themes={["light", "dark", "dev"]}
+        themes={["light", "dark", "dev", "vice"]}
         attribute="class"
       >
         <ProgressProvider
