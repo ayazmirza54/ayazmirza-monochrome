@@ -31,6 +31,8 @@ const darkModeScript = String.raw`
       document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
     } else if (localStorage.theme === 'dev') {
       document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dev}')
+    } else if (localStorage.theme === 'vice') {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.vice}')
     }
   } catch (_) {}
 

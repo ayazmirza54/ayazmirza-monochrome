@@ -1,6 +1,6 @@
 "use client"
 
-import { SquareTerminalIcon } from "lucide-react"
+import { SquareTerminalIcon, TreePalmIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useHotkeys } from "react-hotkeys-hook"
 
@@ -18,7 +18,7 @@ import {
 import { Button } from "./ui/button"
 import { Kbd } from "./ui/kbd"
 
-const THEMES = ["light", "dark", "dev"] as const
+const THEMES = ["light", "dark", "dev", "vice"] as const
 
 export function ThemeToggle() {
   const { resolvedTheme, systemTheme, setTheme } = useTheme()
@@ -65,7 +65,11 @@ export function ThemeToggle() {
               className="hidden size-4 [html.dev_&]:block"
               aria-hidden
             />
-            <DarkSideIcon className="size-3.5 [html.dev_&]:hidden" />
+            <TreePalmIcon
+              className="hidden size-4 [html.vice_&]:block"
+              aria-hidden
+            />
+            <DarkSideIcon className="size-3.5 [html.dev_&]:hidden [html.vice_&]:hidden" />
           </Button>
         }
       />

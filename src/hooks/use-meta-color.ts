@@ -8,6 +8,7 @@ export function useMetaColor() {
 
   const metaColor = React.useMemo(() => {
     if (resolvedTheme === "dev") return META_THEME_COLORS.dev
+    if (resolvedTheme === "vice") return META_THEME_COLORS.vice
     return resolvedTheme === "dark"
       ? META_THEME_COLORS.dark
       : META_THEME_COLORS.light

@@ -1,4 +1,4 @@
-import { Caveat, Noto_Serif } from "next/font/google"
+import { Bebas_Neue, Caveat, Noto_Serif } from "next/font/google"
 import localFont from "next/font/local"
 import { GeistSans } from "geist/font/sans"
 
@@ -22,6 +22,14 @@ const fontMono = localFont({
   src: "../assets/fonts/PaperMono[wght].woff2",
   display: "swap",
   variable: "--font-mono",
+})
+
+// Only vice mode uses it, so it loads on demand instead of on every page.
+const fontVice = Bebas_Neue({
+  weight: "400",
+  display: "swap",
+  preload: false,
+  variable: "--font-vice",
 })
 
 // Only the iPod uses it, so it loads on demand instead of on every page.
@@ -61,5 +69,6 @@ export const fontVariables = cn(
   fontSerif.variable,
   fontHandwritten.variable,
   fontChicagoKare.variable,
+  fontVice.variable,
   "[--font-sans:var(--font-geist-sans)]"
 )

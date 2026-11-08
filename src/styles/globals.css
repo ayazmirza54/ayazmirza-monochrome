@@ -6,11 +6,12 @@
 @import "./scroll-fade-effect.css";
 @import "./style-preview.css";
 @import "./dev-theme.css";
+@import "./vice-theme.css";
 
 @plugin "@tailwindcss/typography";
 
-/* Dev mode is a dark theme, so it shares every `dark:` style. */
-@custom-variant dark (&:where(.dark, .dark *, .dev, .dev *));
+/* Dev and vice modes are dark themes, so they share every `dark:` style. */
+@custom-variant dark (&:where(.dark, .dark *, .dev, .dev *, .vice, .vice *));
 
 @custom-variant supports-timeline-scroll {
   @supports (animation-timeline: scroll()) {
@@ -397,7 +398,8 @@
 }
 
 .dark,
-.dev {
+.dev,
+.vice {
   /* zinc-950 */
   --background: oklch(0.141 0.005 285.823);
 

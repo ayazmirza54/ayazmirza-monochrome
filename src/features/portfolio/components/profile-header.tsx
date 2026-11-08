@@ -11,12 +11,21 @@ export function ProfileHeader() {
   return (
     <div className="screen-line-bottom grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] overflow-y-clip border-x border-x-line after:z-1">
       <figure className="relative col-span-2 p-2 sm:col-span-1 sm:col-start-2 sm:p-4">
-        <SiteMarkIsometric />
+        <div className="[html.vice_&]:hidden">
+          <SiteMarkIsometric />
+        </div>
+        {USER.bannerVice && (
+          <img
+            className="hidden aspect-1600/1075 w-full rounded-xl border border-line object-cover select-none [html.vice_&]:block"
+            src={USER.bannerVice}
+            alt={`${USER.displayName} in Vice City`}
+          />
+        )}
 
         {/* w-36 needs ~1088px before the gutter can hold it without clipping,
             and the mark ignores coarse pointers, so nothing to annotate there. */}
         <HandwrittenNote
-          className="bottom-20 left-full hidden w-36 flex-col items-start pointer-fine:xl:flex"
+          className="bottom-20 left-full hidden w-36 flex-col items-start pointer-fine:xl:flex [html.vice_&]:hidden"
           aria-hidden
         >
           <HandwrittenArrow className="-scale-y-100 -rotate-6" />
@@ -41,10 +50,17 @@ export function ProfileHeader() {
                   alt={`${USER.displayName}'s avatar`}
                 />
                 <img
-                  className="hidden size-full rounded-[inherit] object-cover select-none dark:block"
+                  className="hidden size-full rounded-[inherit] object-cover select-none dark:block [html.vice_&]:hidden"
                   src={USER.avatar}
                   alt={`${USER.displayName}'s avatar`}
                 />
+                {USER.avatarVice && (
+                  <img
+                    className="hidden size-full rounded-[inherit] object-cover select-none [html.vice_&]:block"
+                    src={USER.avatarVice}
+                    alt={`${USER.displayName}'s avatar`}
+                  />
+                )}
               </div>
 
               {/* The label assumes size-40 (sm+); the gutter fits it from lg. */}
