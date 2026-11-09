@@ -58,6 +58,18 @@ All content lives in `src/features/doc/content/` as MDX files, split into `blog/
 - Follow SOLID principles
 - Headings in sentence-case (capitalize only the first word and proper nouns), applies to Markdown/MDX docs and prose
 
+### State machines
+
+When a component's state is a lifecycle (several flags or nullable values that change together, like `isLoading` + `isDone` + `startedAt`), model it as one explicit machine instead of loose flags:
+
+- Put the states, events, and a pure `xTransition(state, event)` in a `*-machine.ts` file next to the feature (e.g. `src/features/doc/lib/page-copy-machine.ts`), with an ASCII diagram in the doc comment
+- Return the same state for events that do not apply, so `useReducer` bails out and stale timers or late async results are ignored
+- Drive it with `useReducer`; keep timers in effects keyed on the state so they cancel on unmount
+- Cover transitions in a co-located `*-machine.test.ts` (pure, runs in the node test environment)
+- Keep orthogonal concerns separate (e.g. user intent vs. what a `<video>` is actually doing)
+
+Existing machines: `rg -l "Transition\(" src --glob "*-machine.ts"`
+
 ## Commands
 
 ```bash
