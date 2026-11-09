@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useReducer, useRef, useState } from "react"
 import type { Transition } from "motion/react"
 import { motion, useInView } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { useMediaQuery } from "@/hooks/use-media-query"
+
+import { craftVideoMediaTransition } from "../lib/craft-video-machine"
 
 // `auto` holds back under reduced motion. Pressing play is an explicit opt-in,
 // so `playing` ignores that preference.
@@ -29,8 +31,8 @@ export function CraftVideo({
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
 
   const [playback, setPlayback] = useState<Playback>("auto")
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isBlocked, setIsBlocked] = useState(false)
+  const [media, dispatchMedia] = useReducer(craftVideoMediaTransition, "paused")
+  const isPlaying = media === "playing"
 
   const shouldPlay =
     isInView &&
@@ -41,13 +43,13 @@ export function CraftVideo({
   const isHeldBack =
     playback === "paused" ||
     (playback === "auto" && prefersReducedMotion) ||
-    isBlocked
+    media === "blocked"
 
   const play = (video: HTMLVideoElement) => {
     video.play().catch((error: DOMException) => {
       // Autoplay was refused (e.g. iOS Low Power Mode). An AbortError only
       // means a pause() landed before playback started.
-      if (error.name === "NotAllowedError") setIsBlocked(true)
+      if (error.name === "NotAllowedError") dispatchMedia("blocked")
     })
   }
 
@@ -98,11 +100,8 @@ export function CraftVideo({
         muted
         loop
         playsInline
-        onPlay={() => {
-          setIsPlaying(true)
-          setIsBlocked(false)
-        }}
-        onPause={() => setIsPlaying(false)}
+        onPlay={() => dispatchMedia("play")}
+        onPause={() => dispatchMedia("pause")}
         // A pointer shortcut. The button is the keyboard and screen reader
         // control.
         onClick={togglePlayback}

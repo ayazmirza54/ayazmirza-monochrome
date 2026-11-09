@@ -2,12 +2,11 @@
 
 "use client"
 
-import { useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useReducer } from "react"
 import { IconCheck, IconCopy, IconX } from "@tabler/icons-react"
 import { ChevronDownIcon } from "lucide-react"
 
 import { SOURCE_CODE_GITHUB_URL } from "@/config/site"
-import type { CopyState } from "@/hooks/use-copy-to-clipboard"
 import { useUiTiks } from "@/hooks/use-ui-tiks"
 import { Button } from "@/components/ui/button"
 import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group"
@@ -28,24 +27,46 @@ import {
   V0Icon,
 } from "@/components/icons"
 import { CopyStateIcon } from "@/registry/components/copy-button"
+import {
+  PAGE_COPY_RESET_DELAY_MS,
+  PAGE_COPY_SLOW_DELAY_MS,
+  pageCopyIconState,
+  pageCopyTransition,
+} from "@/features/doc/lib/page-copy-machine"
 
 const cache = new Map<string, string>()
 
 export function LLMCopyButton({ markdownUrl }: { markdownUrl: string }) {
-  const [state, setState] = useState<CopyState>("idle")
-  const [isCopying, setIsCopying] = useState(false)
-  const operationRef = useRef(false)
+  const [phase, dispatch] = useReducer(pageCopyTransition, "idle")
 
   const { success, error } = useUiTiks()
 
+  // Timers live in effects, keyed on the phase, so they cancel on unmount and
+  // can never fire into a phase they were not meant for.
+  useEffect(() => {
+    if (phase === "pending") {
+      const timer = setTimeout(
+        () => dispatch({ type: "slow" }),
+        PAGE_COPY_SLOW_DELAY_MS
+      )
+      return () => clearTimeout(timer)
+    }
+
+    if (phase === "done" || phase === "error") {
+      const timer = setTimeout(
+        () => dispatch({ type: "reset" }),
+        PAGE_COPY_RESET_DELAY_MS
+      )
+      return () => clearTimeout(timer)
+    }
+  }, [phase])
+
   const handleCopy = async () => {
-    if (operationRef.current) return
+    // Clicks are discrete events, so React has re-rendered with the new phase
+    // before the next click handler runs.
+    if (phase !== "idle") return
 
-    operationRef.current = true
-
-    const loadingTimer = setTimeout(() => {
-      setIsCopying(true)
-    }, 150)
+    dispatch({ type: "start" })
 
     try {
       const cached = cache.get(markdownUrl)
@@ -64,30 +85,26 @@ export function LLMCopyButton({ markdownUrl }: { markdownUrl: string }) {
         ])
       }
       success()
-      setState("done")
+      dispatch({ type: "succeed" })
     } catch {
       error()
-      setState("error")
-    } finally {
-      clearTimeout(loadingTimer)
-      setIsCopying(false)
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      operationRef.current = false
-      setState("idle")
+      dispatch({ type: "fail" })
     }
   }
+
+  const isLoading = phase === "loading"
 
   return (
     <Button
       className="h-7 gap-1.5 border-none px-2 text-[0.8125rem] active:scale-none"
       variant="secondary"
       size="sm"
-      aria-busy={isCopying}
-      disabled={isCopying}
+      aria-busy={isLoading}
+      disabled={isLoading}
       onClick={handleCopy}
     >
       <CopyStateIcon
-        state={state}
+        state={pageCopyIconState(phase)}
         idleIcon={<IconCopy />}
         doneIcon={<IconCheck />}
         errorIcon={<IconX />}

@@ -5,8 +5,8 @@ import {
   useActionState,
   useEffect,
   useId,
+  useReducer,
   useRef,
-  useState,
 } from "react"
 import { useAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
@@ -25,6 +25,7 @@ import {
   type DocFeedbackState,
   type DocFeedbackVote,
 } from "@/features/doc/lib/doc-feedback"
+import { docFeedbackTransition } from "@/features/doc/lib/doc-feedback-machine"
 
 const VOTE_OPTIONS = [
   { value: "yes", label: "Yes", icon: <ThumbsUpIcon className="-mr-0.5" /> },
@@ -64,7 +65,7 @@ export function DocFeedback({ category, slug }: DocFeedbackProps) {
 
   // Unlike `hasVoted`, this is not persisted: the thanks message and note form
   // only appear right after voting, not for a returning visitor.
-  const [justVoted, setJustVoted] = useState(false)
+  const [step, dispatchStep] = useReducer(docFeedbackTransition, "prompt")
 
   const { success } = useUiTiks()
 
@@ -82,9 +83,6 @@ export function DocFeedback({ category, slug }: DocFeedbackProps) {
   const hasError = noteState.status === "error"
   const noteSent = noteState.status === "success"
 
-  // Keeps the form mounted until the send button has finished its success state.
-  const [sendConfirmed, setSendConfirmed] = useState(false)
-
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const alertRef = useRef<HTMLDivElement>(null)
 
@@ -92,14 +90,14 @@ export function DocFeedback({ category, slug }: DocFeedbackProps) {
   // the form unmounts), so move focus to the next meaningful element. On a
   // validation error that is the textarea again.
   useEffect(() => {
-    if (!justVoted) {
+    if (step === "prompt") {
       return
     }
 
     const next =
       noteState.status === "success" ? alertRef.current : textareaRef.current
     next?.focus()
-  }, [justVoted, noteState])
+  }, [step, noteState])
 
   const handleVote = (value: DocFeedbackVote) => {
     trackEvent({
@@ -107,7 +105,7 @@ export function DocFeedback({ category, slug }: DocFeedbackProps) {
       properties: { category, slug, vote: value },
     })
     setVotes((prev) => ({ ...prev, [key]: value }))
-    setJustVoted(true)
+    dispatchStep("vote")
     success()
   }
 
@@ -149,7 +147,7 @@ export function DocFeedback({ category, slug }: DocFeedbackProps) {
           </div>
         </div>
 
-        {vote && justVoted && (
+        {vote && step !== "prompt" && (
           <>
             <Callout
               ref={alertRef}
@@ -162,7 +160,7 @@ export function DocFeedback({ category, slug }: DocFeedbackProps) {
                 : "Thanks for your feedback!"}
             </Callout>
 
-            {!sendConfirmed && (
+            {step === "note" && (
               <form
                 className="flex flex-col gap-2"
                 // Submitting through `action` would reset the fields after a
@@ -226,8 +224,10 @@ export function DocFeedback({ category, slug }: DocFeedbackProps) {
                   size="sm"
                   status={isSending ? "loading" : noteSent ? "success" : "idle"}
                   onStatusChange={(status) => {
+                    // Keeps the form mounted until the send button has
+                    // finished its success state.
                     if (status === "idle" && noteSent) {
-                      setSendConfirmed(true)
+                      dispatchStep("noteConfirmed")
                     }
                   }}
                   successLabel="Sent"

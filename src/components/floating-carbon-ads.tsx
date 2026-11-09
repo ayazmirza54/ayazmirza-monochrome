@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useReducer, useRef } from "react"
 import { XIcon } from "lucide-react"
 
 import { trackEvent } from "@/lib/events"
@@ -10,49 +10,58 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
 import { CarbonAds } from "@/components/carbon-ads"
 import {
+  floatingCarbonAdsTransition,
+  type FloatingCarbonAdsState,
+} from "@/components/floating-carbon-ads-machine"
+import {
   HandwrittenArrow,
   HandwrittenNote,
 } from "@/features/portfolio/components/handwritten-note"
 
 const DISMISSED_KEY = "carbonAdsDismissed"
 
-function readDismissed() {
+function readInitialState(): FloatingCarbonAdsState {
   try {
-    return sessionStorage.getItem(DISMISSED_KEY) === "true"
+    if (sessionStorage.getItem(DISMISSED_KEY) === "true") {
+      return { status: "dismissed" }
+    }
   } catch {
-    return false
+    // Blocked storage: treat as not dismissed.
   }
+  return { status: "idle" }
 }
 
 export function FloatingCarbonAds() {
   const isDesktop = useMediaQuery("(min-width: 1280px)")
   const scrolled = useIsScrolled()
-  const [dismissed, setDismissed] = useState(readDismissed)
-  const visible = isDesktop && scrolled === false && !dismissed
+  const [ad, dispatch] = useReducer(
+    floatingCarbonAdsTransition,
+    undefined,
+    readInitialState
+  )
+  const visible = isDesktop && scrolled === false && ad.status !== "dismissed"
 
-  // Load once visible so a mid-page landing counts no impression, then stay
-  // mounted: a remount would request a new ad.
-  const [loaded, setLoaded] = useState(false)
-  if (visible && !loaded) {
-    setLoaded(true)
+  // Load once visible so a mid-page landing counts no impression. The
+  // transition only applies from `idle`, so the ad then stays mounted.
+  if (visible && ad.status === "idle") {
+    dispatch({ type: "reveal" })
   }
 
   const containerRef = useRef<HTMLDivElement>(null)
-  const [shownAt, setShownAt] = useState<number | null>(null)
 
   // carbon.js may fill the slot late or never, so the close button waits.
   useEffect(() => {
     const container = containerRef.current
-    if (!container || shownAt !== null) return
+    if (!container || ad.status !== "loading") return
 
     const observer = new MutationObserver(() => {
       if (container.querySelector("#carbonads")) {
-        setShownAt(performance.now())
+        dispatch({ type: "fill", at: performance.now() })
       }
     })
     observer.observe(container, { childList: true, subtree: true })
     return () => observer.disconnect()
-  }, [loaded, shownAt])
+  }, [ad.status])
 
   const close = (shownAt: number) => {
     trackEvent({
@@ -69,10 +78,10 @@ export function FloatingCarbonAds() {
       // Blocked storage: closes for this page view only.
     }
 
-    setDismissed(true)
+    dispatch({ type: "dismiss" })
   }
 
-  if (dismissed || !loaded) return null
+  if (ad.status === "idle" || ad.status === "dismissed") return null
 
   return (
     <div
@@ -87,7 +96,7 @@ export function FloatingCarbonAds() {
         "transition-[opacity,visibility] duration-300 data-[visible=false]:invisible data-[visible=false]:opacity-0"
       )}
     >
-      {shownAt !== null && (
+      {ad.status === "shown" && (
         // Outside the ad box: Carbon forbids covering any part of the ad.
         <div className="flex items-end justify-between gap-2">
           <HandwrittenNote
@@ -107,7 +116,7 @@ export function FloatingCarbonAds() {
             variant="ghost"
             size="icon-sm"
             aria-label="Close ad"
-            onClick={() => close(shownAt)}
+            onClick={() => close(ad.shownAt)}
           >
             <XIcon />
           </Button>
