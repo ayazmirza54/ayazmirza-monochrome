@@ -6,6 +6,7 @@ import {
   PanelTitleSup,
 } from "@/features/portfolio/components/panel"
 import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
+import { ScrambleText } from "@/features/portfolio/components/scramble-text"
 import { PROJECTS } from "@/features/portfolio/data/projects"
 
 import { ProjectItem } from "./project-item"
@@ -17,7 +18,9 @@ export function Projects() {
     <Panel id={ID}>
       <PanelHeader>
         <PanelTitle>
-          <a href={`#${ID}`}>Projects</a>
+          <a href={`#${ID}`}>
+            <ScrambleText text="Projects" />
+          </a>
           <PanelTitleSup>({PROJECTS.length})</PanelTitleSup>
           <PanelTitleCopy id={ID} />
         </PanelTitle>

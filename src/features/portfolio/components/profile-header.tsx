@@ -1,5 +1,7 @@
 import { USER } from "@/features/portfolio/data/user"
 
+import { AsciiDitherField } from "./ascii/ascii-dither-field"
+import { AvatarTilt } from "./avatar-tilt"
 import { DiameterDimension } from "./diameter-dimension"
 import { FlipSentences } from "./flip-sentences"
 import { HandwrittenArrow, HandwrittenNote } from "./handwritten-note"
@@ -11,6 +13,10 @@ export function ProfileHeader() {
   return (
     <div className="screen-line-bottom grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] overflow-y-clip border-x border-x-line after:z-1">
       <figure className="relative col-span-2 p-2 sm:col-span-1 sm:col-start-2 sm:p-4">
+        {/* Faded toward the edges so it reads as texture behind the mark,
+            never as a box. */}
+        <AsciiDitherField className="absolute inset-0 -z-1 size-full mask-radial-[50%_50%] mask-radial-from-35% mask-radial-to-100% text-foreground/25 dark:text-foreground/20" />
+
         <SiteMarkIsometric />
 
         {/* w-36 needs ~1088px before the gutter can hold it without clipping,
@@ -34,7 +40,7 @@ export function ProfileHeader() {
             {/* Double rule: two rings separated by background gaps, all inside
                 the measured diameter so the photo never touches either edge. */}
             <div className="relative z-10 size-30 rounded-full border border-foreground/80 bg-background p-1 min-[24rem]:size-32 sm:size-40 dark:border-foreground/45">
-              <div className="relative size-full rounded-full border border-foreground/80 p-0.5 dark:border-foreground/45">
+              <AvatarTilt className="relative size-full rounded-full border border-foreground/80 p-0.5 dark:border-foreground/45">
                 <img
                   className="block size-full rounded-[inherit] object-cover select-none dark:hidden"
                   src={USER.avatarSketch ?? USER.avatar}
@@ -45,7 +51,7 @@ export function ProfileHeader() {
                   src={USER.avatar}
                   alt={`${USER.displayName}'s avatar`}
                 />
-              </div>
+              </AvatarTilt>
 
               {/* The label assumes size-40 (sm+); the gutter fits it from lg. */}
               <DiameterDimension

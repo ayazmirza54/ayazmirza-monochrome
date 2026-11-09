@@ -12,6 +12,7 @@ import {
   PanelTitle,
 } from "@/features/portfolio/components/panel"
 import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
+import { ScrambleText } from "@/features/portfolio/components/scramble-text"
 import { EXPERIENCES } from "@/features/portfolio/data/experiences"
 import type { Experience } from "@/features/portfolio/types/experiences"
 
@@ -25,7 +26,9 @@ export function Experiences() {
     <Panel id={ID}>
       <PanelHeader>
         <PanelTitle>
-          <a href={`#${ID}`}>Experience</a>
+          <a href={`#${ID}`}>
+            <ScrambleText text="Experience" />
+          </a>
           <PanelTitleCopy id={ID} />
         </PanelTitle>
       </PanelHeader>

@@ -12,6 +12,7 @@ import {
   PanelTitleSup,
 } from "@/features/portfolio/components/panel"
 import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
+import { ScrambleText } from "@/features/portfolio/components/scramble-text"
 
 const ID = "blog"
 
@@ -22,7 +23,9 @@ export function Blog() {
     <Panel id={ID}>
       <PanelHeader>
         <PanelTitle>
-          <a href={`#${ID}`}>Blog</a>
+          <a href={`#${ID}`}>
+            <ScrambleText text="Blog" />
+          </a>
           <PanelTitleSup>({allPosts.length})</PanelTitleSup>
           <PanelTitleCopy id={ID} />
         </PanelTitle>

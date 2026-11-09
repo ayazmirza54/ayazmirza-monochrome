@@ -6,6 +6,7 @@ import { JSON_LD_ID } from "@/config/json-ld"
 import { JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl, cn } from "@/lib/utils"
 import { FloatingCarbonAds } from "@/components/floating-carbon-ads"
+import { AsciiDitherField } from "@/features/portfolio/components/ascii/ascii-dither-field"
 import { Blog } from "@/features/portfolio/components/blog"
 import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
@@ -91,10 +92,17 @@ function Separator({ className, children }: React.ComponentProps<"div">) {
   return (
     <div
       className={cn(
-        "stripe-divider h-(--separator-height) w-full border-x border-x-line",
+        "relative h-(--separator-height) w-full border-x border-x-line",
         className
       )}
     >
+      {/* Full-bleed like the rules around it; the page clips the overflow. */}
+      <AsciiDitherField
+        className="absolute inset-y-0 left-1/2 -z-1 h-full w-screen -translate-x-1/2 text-foreground/20"
+        speed={0.6}
+        intensity={0.55}
+        interactive={false}
+      />
       {children}
       {/* <div
         className="absolute -top-1.25 -left-1.25 z-2 flex size-2.25 border bg-background"

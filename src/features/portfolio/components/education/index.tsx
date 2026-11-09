@@ -4,6 +4,7 @@ import {
   PanelTitle,
 } from "@/features/portfolio/components/panel"
 import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
+import { ScrambleText } from "@/features/portfolio/components/scramble-text"
 import { EDUCATION } from "@/features/portfolio/data/education"
 import type { Education } from "@/features/portfolio/types/education"
 
@@ -16,7 +17,9 @@ export function Education() {
     <Panel id={ID}>
       <PanelHeader>
         <PanelTitle>
-          <a href={`#${ID}`}>Education</a>
+          <a href={`#${ID}`}>
+            <ScrambleText text="Education" />
+          </a>
           <PanelTitleCopy id={ID} />
         </PanelTitle>
       </PanelHeader>

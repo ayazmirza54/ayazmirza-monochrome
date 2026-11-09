@@ -79,8 +79,10 @@ function AwardRow({ entry }: { entry: AwardRecognition }) {
     <Collapsible>
       {/* Only the title is the trigger (accordion pattern); its overlay keeps
           the whole row clickable, while the paperclip link sits above it. */}
-      <div className="relative flex items-center hover:bg-accent-muted">
-        <IconTile className="mx-4">{award.icon ?? <CrownIcon />}</IconTile>
+      <div className="group/row relative flex items-center hover:bg-accent-muted">
+        <IconTile className="mx-4 transition-transform duration-500 ease-out group-hover/row:rotate-y-360 motion-reduce:transition-none">
+          {award.icon ?? <CrownIcon />}
+        </IconTile>
 
         <div className="flex flex-1 items-center gap-2 border-l border-dashed border-line p-4">
           <div className="flex-1">

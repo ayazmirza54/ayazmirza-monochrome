@@ -1,3 +1,5 @@
+import { ScrambleText } from "@/features/portfolio/components/scramble-text"
+
 import { TECH_STACK } from "../data/tech-stack"
 import type { TechStack as TechStackType } from "../types/tech-stack"
 import { Panel, PanelHeader, PanelTitle } from "./panel"
@@ -10,7 +12,9 @@ export function TechStack() {
     <Panel id={ID}>
       <PanelHeader>
         <PanelTitle>
-          <a href={`#${ID}`}>Stack</a>
+          <a href={`#${ID}`}>
+            <ScrambleText text="Stack" />
+          </a>
           <PanelTitleCopy id={ID} />
         </PanelTitle>
       </PanelHeader>
@@ -54,7 +58,7 @@ export function TechStack() {
                           href={item.href}
                           target="_blank"
                           rel="noopener"
-                          className="flex h-(--badge-height) items-center justify-center gap-1.25 rounded-full bg-zinc-50/80 px-2 font-mono text-xs text-foreground inset-ring-1 inset-ring-border dark:bg-zinc-900/80 [&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground/80"
+                          className="flex h-(--badge-height) items-center justify-center gap-1.25 rounded-full bg-zinc-50/80 px-2 font-mono text-xs text-foreground inset-ring-1 inset-ring-border transition-[translate,box-shadow] duration-200 ease-out hover:-translate-y-px hover:inset-ring-foreground/40 motion-reduce:translate-y-0 dark:bg-zinc-900/80 [&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:shrink-0 [&_svg]:text-muted-foreground/80 [&_svg]:transition-transform [&_svg]:duration-500 [&_svg]:ease-out hover:[&_svg]:rotate-y-360 motion-reduce:[&_svg]:transition-none"
                         >
                           {item.icon}
                           {item.title}
