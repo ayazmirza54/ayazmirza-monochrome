@@ -46,3 +46,5 @@ Please refer to the [Development Guide](./DEVELOPMENT.md) for more details.
 ## Credits
 
 Forked from [chanhdai.com](https://github.com/ncdai/chanhdai.com) by Nguyen Chanh Dai, released under the [MIT license](./LICENSE). The original name and brand assets are excluded from that license (see [TRADEMARK.md](./TRADEMARK.md)) and have been replaced here.
+
+The floating 3D icons in the margins of the home page (`public/images/decorations/`) are from [Fluent Emoji](https://github.com/microsoft/fluentui-emoji) by Microsoft, released under the MIT license. Their placement lives in `src/features/portfolio/components/gutter-decorations.tsx`.

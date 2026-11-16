@@ -11,6 +11,7 @@ import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { FrameWidthDimension } from "@/features/portfolio/components/frame-width-dimension"
 import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
+import { GutterDecorations } from "@/features/portfolio/components/gutter-decorations"
 import { Hello } from "@/features/portfolio/components/hello"
 import { Numbers } from "@/features/portfolio/components/numbers"
 import { Overview } from "@/features/portfolio/components/overview"
@@ -34,7 +35,8 @@ export default function HomePage() {
       <JsonLdScript data={getProfilePageJsonLd()} />
       {CARBON_ADS && <FloatingCarbonAds />}
 
-      <div className="[--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
+      <div className="relative [--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
+        <GutterDecorations />
         <div className="mx-auto md:max-w-3xl">
           <FrameWidthDimension />
           <ProfileHeader />

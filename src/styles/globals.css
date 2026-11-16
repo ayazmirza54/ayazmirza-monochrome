@@ -117,6 +117,21 @@
       opacity: 0.15;
     }
   }
+
+  /* Slow bob and sway around a resting tilt set per item (--gutter-rotate). */
+  --animate-gutter-float: gutter-float
+    var(--tw-animation-duration, var(--tw-duration, 7s)) ease-in-out infinite;
+
+  @keyframes gutter-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--gutter-rotate, 0deg));
+    }
+    50% {
+      transform: translateY(-14px)
+        rotate(calc(var(--gutter-rotate, 0deg) + 4deg));
+    }
+  }
 }
 
 @utility link {
