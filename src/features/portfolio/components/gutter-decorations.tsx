@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 
 import { cn } from "@/lib/utils"
+import { useUiTiks } from "@/hooks/use-ui-tiks"
 
 type Decoration = {
   /** File name in `public/images/decorations`, without extension. */
@@ -198,13 +199,92 @@ const MAX_DRIFT = 60
 /** Width of one gutter; `%` resolves against this full-width layer. */
 const GUTTER = `(50% - ${HALF_COLUMN}px)`
 
+/** Delay per pixel of distance from the clicked icon, so the wave spreads out. */
+const WAVE_DELAY_PER_PX = 0.55
+const WAVE_MAX_DELAY = 900
+
+/** Hop, squash and a full turn: what every icon does as the wave reaches it. */
+const HOP: Keyframe[] = [
+  { transform: "translateY(0) scale(1, 1) rotate(0deg)" },
+  { offset: 0.14, transform: "translateY(6px) scale(1.14, 0.84) rotate(0deg)" },
+  {
+    offset: 0.5,
+    transform: "translateY(-52px) scale(0.92, 1.1) rotate(200deg)",
+  },
+  { offset: 0.8, transform: "translateY(5px) scale(1.1, 0.9) rotate(355deg)" },
+  { transform: "translateY(0) scale(1, 1) rotate(360deg)" },
+]
+
+/** The clicked icon goes first and goes bigger. */
+const POP: Keyframe[] = [
+  { transform: "translateY(0) scale(1) rotate(0deg)" },
+  { offset: 0.12, transform: "translateY(8px) scale(1.2, 0.78) rotate(0deg)" },
+  { offset: 0.45, transform: "translateY(-70px) scale(1.35) rotate(-200deg)" },
+  {
+    offset: 0.78,
+    transform: "translateY(6px) scale(1.12, 0.9) rotate(-370deg)",
+  },
+  { transform: "translateY(0) scale(1) rotate(-360deg)" },
+]
+
+/** With reduced motion the wave is a brief glow instead of movement. */
+const GLOW: Keyframe[] = [
+  { filter: "brightness(1)" },
+  { offset: 0.4, filter: "brightness(1.35)" },
+  { filter: "brightness(1)" },
+]
+
 /**
  * Floating 3D icons in the empty margins either side of the content column on
- * wide screens: purely decorative, so hidden from assistive tech and from
- * pointer events. Icons are Microsoft's Fluent Emoji (MIT).
+ * wide screens. Clicking any of them sends a hop-and-spin wave through all of
+ * them, starting from the one clicked. They are decoration, so hidden from
+ * assistive tech and left out of the tab order. Icons are Microsoft's Fluent
+ * Emoji (MIT).
  */
 export function GutterDecorations({ className }: { className?: string }) {
   const rootRef = useRef<HTMLDivElement>(null)
+  const buttonsRef = useRef<HTMLButtonElement[]>([])
+  const animationsRef = useRef<Animation[]>([])
+  const { success } = useUiTiks()
+
+  const playWave = useCallback(
+    (origin: number) => {
+      const buttons = buttonsRef.current
+      const source = buttons[origin]
+      if (!source) return
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+
+      // A second click restarts the wave from the new icon.
+      for (const animation of animationsRef.current) animation.cancel()
+
+      const centre = (element: Element) => {
+        const rect = element.getBoundingClientRect()
+        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+      }
+      const from = centre(source)
+      animationsRef.current = buttons.map((button, i) => {
+        const to = centre(button)
+        const distance = Math.hypot(to.x - from.x, to.y - from.y)
+        const delay = Math.min(WAVE_MAX_DELAY, distance * WAVE_DELAY_PER_PX)
+        if (reduced) {
+          return button.animate(GLOW, { duration: 600, delay: delay / 3 })
+        }
+        const isSource = i === origin
+        return button.animate(isSource ? POP : HOP, {
+          duration: isSource ? 1100 : 900,
+          delay: isSource ? 0 : 120 + delay,
+          easing: "cubic-bezier(0.3, 0.7, 0.4, 1)",
+          // Icons on the right spin the other way, so the wave mirrors.
+          direction:
+            !isSource && DECORATIONS[i].side === "right" ? "reverse" : "normal",
+        })
+      })
+      success()
+    },
+    [success]
+  )
 
   useEffect(() => {
     const root = rootRef.current
@@ -212,6 +292,7 @@ export function GutterDecorations({ className }: { className?: string }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
 
     const items = Array.from(root.children) as HTMLElement[]
+
     // Resting centres in page coordinates, re-read when the layout changes so
     // scrolling itself never forces a layout.
     let centres: number[] = []
@@ -273,12 +354,13 @@ export function GutterDecorations({ className }: { className?: string }) {
       ref={rootRef}
       aria-hidden
       className={cn(
-        // Only where the margins are wide enough to hold an icon clear of the text.
-        "pointer-events-none absolute inset-0 -z-1 hidden overflow-clip select-none min-[1180px]:block",
+        // Only where the margins are wide enough to hold an icon clear of the
+        // text. Not behind the page (`-z-1`): the wrapper would take the clicks.
+        "pointer-events-none absolute inset-0 z-0 hidden overflow-clip select-none min-[1180px]:block",
         className
       )}
     >
-      {DECORATIONS.map((item) => (
+      {DECORATIONS.map((item, index) => (
         <div
           key={item.name}
           className="absolute will-change-transform"
@@ -297,22 +379,34 @@ export function GutterDecorations({ className }: { className?: string }) {
             } as React.CSSProperties
           }
         >
-          <img
-            src={`/images/decorations/${item.name}.png`}
-            alt=""
-            width={256}
-            height={256}
-            loading="lazy"
-            decoding="async"
-            draggable={false}
-            className="size-full animate-gutter-float object-contain drop-shadow-[0_18px_24px_rgb(0_0_0/0.18)] motion-reduce:animate-none dark:brightness-90 dark:drop-shadow-[0_18px_28px_rgb(0_0_0/0.55)]"
-            style={
-              {
-                "--gutter-rotate": `${item.rotate}deg`,
-                animationDelay: `-${item.delay}s`,
-              } as React.CSSProperties
-            }
-          />
+          <button
+            ref={(node) => {
+              if (node) buttonsRef.current[index] = node
+            }}
+            type="button"
+            tabIndex={-1}
+            onClick={() => playWave(index)}
+            // The hover and press feedback use `scale`, which stacks with the
+            // wave's `transform` instead of fighting it.
+            className="pointer-events-auto block size-full cursor-pointer transition-[scale] duration-200 ease-out hover:scale-110 active:scale-95 motion-reduce:transition-none"
+          >
+            <img
+              src={`/images/decorations/${item.name}.png`}
+              alt=""
+              width={256}
+              height={256}
+              loading="lazy"
+              decoding="async"
+              draggable={false}
+              className="size-full animate-gutter-float object-contain drop-shadow-[0_18px_24px_rgb(0_0_0/0.18)] motion-reduce:animate-none dark:brightness-90 dark:drop-shadow-[0_18px_28px_rgb(0_0_0/0.55)]"
+              style={
+                {
+                  "--gutter-rotate": `${item.rotate}deg`,
+                  animationDelay: `-${item.delay}s`,
+                } as React.CSSProperties
+              }
+            />
+          </button>
         </div>
       ))}
     </div>
