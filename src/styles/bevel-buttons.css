@@ -1,0 +1,286 @@
+/*
+ * Bevel & shine buttons, adapted from a dark UI kit to every theme.
+ *
+ * A bevel is a radial glow rising from the bottom edge plus inner highlights
+ * on the top and bottom edges. Hover and pressed fills sit on ::before and
+ * ::after so they can fade in, since gradients themselves do not transition.
+ */
+
+:root {
+  --bevel-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --bevel-from: #ffffff;
+  --bevel-to: #ececee;
+  --bevel-hover-from: #ffffff;
+  --bevel-hover-to: #f4f4f5;
+  --bevel-pressed-from: #e4e4e7;
+  --bevel-pressed-to: #f1f1f2;
+  --bevel-border: #d4d4d8;
+  --bevel-shadow:
+    inset 0 2px 1.5px rgb(255 255 255 / 90%), inset 0 -2px 1.5px rgb(0 0 0 / 6%);
+  --bevel-hover-outer: 0 2px 7px rgb(0 0 0 / 12%);
+  --bevel-pressed-shadow:
+    inset 0 -3px 1.5px rgb(0 0 0 / 6%), inset 0 3px 1.5px rgb(0 0 0 / 10%);
+
+  /* Inverse bevel: the dark kit fill, for primary buttons on light pages. */
+  --bevel-inverse-from: #2a2a2a;
+  --bevel-inverse-to: #161414;
+  --bevel-inverse-hover-from: #535353;
+  --bevel-inverse-hover-to: #252525;
+  --bevel-inverse-pressed-from: #353535;
+  --bevel-inverse-pressed-to: #171717;
+  --bevel-inverse-border: #000000;
+  --bevel-inverse-text: #ededed;
+  --bevel-inverse-shadow:
+    inset 0 2px 1.5px rgb(255 255 255 / 25%),
+    inset 0 -2px 1.5px rgb(255 255 255 / 25%);
+
+  --bevel-quiet-hover: rgb(0 0 0 / 5%);
+  --shine-track: #e4e4e7;
+  --shine-light: #18181b;
+}
+
+/* Dark mode uses the kit's own values. */
+.dark,
+.dev {
+  --bevel-from: #2a2a2a;
+  --bevel-to: #161414;
+  --bevel-hover-from: #535353;
+  --bevel-hover-to: #252525;
+  --bevel-pressed-from: #353535;
+  --bevel-pressed-to: #171717;
+  --bevel-border: #000000;
+  --bevel-shadow:
+    inset 0 2px 1.5px rgb(255 255 255 / 25%),
+    inset 0 -2px 1.5px rgb(255 255 255 / 25%);
+  --bevel-hover-outer: 0 2px 7px rgb(0 0 0 / 64%);
+  --bevel-pressed-shadow:
+    inset 0 -3px 1.5px rgb(0 0 0 / 35%), inset 0 3px 1.5px rgb(0 0 0 / 35%);
+
+  --bevel-inverse-from: #ffffff;
+  --bevel-inverse-to: #d4d4d8;
+  --bevel-inverse-hover-from: #ffffff;
+  --bevel-inverse-hover-to: #e4e4e7;
+  --bevel-inverse-pressed-from: #d4d4d8;
+  --bevel-inverse-pressed-to: #a1a1aa;
+  --bevel-inverse-border: #000000;
+  --bevel-inverse-text: #09090b;
+  --bevel-inverse-shadow:
+    inset 0 2px 1.5px rgb(255 255 255 / 80%),
+    inset 0 -2px 1.5px rgb(0 0 0 / 15%);
+
+  --bevel-quiet-hover: rgb(255 255 255 / 5%);
+  --shine-track: #050505;
+  --shine-light: #ffffff;
+}
+
+/* Dev mode: the same bevel in phosphor green. */
+html.dev {
+  --bevel-from: oklch(0.27 0.06 148);
+  --bevel-to: oklch(0.15 0.03 150);
+  --bevel-hover-from: oklch(0.4 0.1 146);
+  --bevel-hover-to: oklch(0.2 0.045 150);
+  --bevel-pressed-from: oklch(0.3 0.07 148);
+  --bevel-pressed-to: oklch(0.15 0.03 150);
+  --bevel-shadow:
+    inset 0 2px 1.5px oklch(0.88 0.2 145 / 25%),
+    inset 0 -2px 1.5px oklch(0.88 0.2 145 / 20%);
+
+  --bevel-inverse-from: oklch(0.9 0.2 145);
+  --bevel-inverse-to: oklch(0.65 0.17 145);
+  --bevel-inverse-hover-from: oklch(0.95 0.18 145);
+  --bevel-inverse-hover-to: oklch(0.72 0.18 145);
+  --bevel-inverse-pressed-from: oklch(0.7 0.17 145);
+  --bevel-inverse-pressed-to: oklch(0.55 0.14 145);
+  --bevel-inverse-text: oklch(0.13 0.025 150);
+
+  --bevel-quiet-hover: oklch(0.88 0.2 145 / 8%);
+  --shine-light: oklch(0.88 0.2 145);
+}
+
+@layer components {
+  .bevel {
+    position: relative;
+    isolation: isolate;
+    border-color: var(--bevel-border);
+    background: radial-gradient(
+      ellipse 50.45% 100% at 49.55% 101.25%,
+      var(--bevel-from),
+      var(--bevel-to)
+    );
+    box-shadow: var(--bevel-shadow);
+    transition:
+      box-shadow 0.25s var(--bevel-ease),
+      transform 0.25s var(--bevel-ease),
+      color 0.25s var(--bevel-ease);
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+
+    &::before {
+      background: radial-gradient(
+        ellipse 50.45% 100% at 49.55% 101.25%,
+        var(--bevel-hover-from),
+        var(--bevel-hover-to)
+      );
+    }
+
+    &::after {
+      background: radial-gradient(
+        ellipse 50.45% 100% at 49.55% 101.25%,
+        var(--bevel-pressed-from),
+        var(--bevel-pressed-to)
+      );
+    }
+
+    &:hover:not(:disabled),
+    &[aria-expanded="true"] {
+      box-shadow: var(--bevel-shadow), var(--bevel-hover-outer);
+    }
+
+    &:hover:not(:disabled)::before,
+    &[aria-expanded="true"]::before {
+      opacity: 1;
+    }
+
+    &:active:not(:disabled) {
+      box-shadow: var(--bevel-pressed-shadow);
+    }
+
+    &:active:not(:disabled)::before {
+      opacity: 0;
+    }
+
+    &:active:not(:disabled)::after {
+      opacity: 1;
+    }
+  }
+
+  /* Primary: the opposite surface to the page. */
+  .bevel-inverse {
+    --bevel-from: var(--bevel-inverse-from);
+    --bevel-to: var(--bevel-inverse-to);
+    --bevel-hover-from: var(--bevel-inverse-hover-from);
+    --bevel-hover-to: var(--bevel-inverse-hover-to);
+    --bevel-pressed-from: var(--bevel-inverse-pressed-from);
+    --bevel-pressed-to: var(--bevel-inverse-pressed-to);
+    --bevel-border: var(--bevel-inverse-border);
+    --bevel-shadow: var(--bevel-inverse-shadow);
+    color: var(--bevel-inverse-text);
+  }
+
+  /* Danger: a red wash over the regular bevel. */
+  .bevel-danger {
+    background:
+      linear-gradient(rgb(255 0 0 / 54%), rgb(255 0 0 / 54%)),
+      radial-gradient(
+        ellipse 50.45% 100% at 49.55% 101.25%,
+        var(--bevel-from),
+        var(--bevel-to)
+      );
+    color: #ffffff;
+  }
+
+  /* Quiet: no chrome until hover, then a faint wash. */
+  .bevel-quiet {
+    position: relative;
+    isolation: isolate;
+    transition: background-color 0.25s var(--bevel-ease);
+
+    &:hover:not(:disabled),
+    &[aria-expanded="true"],
+    &:active:not(:disabled) {
+      background-color: var(--bevel-quiet-hover);
+    }
+  }
+
+  /* Shine: a light that circles the outline. */
+  .shine {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 2px;
+    border: 0;
+    background: var(--shine-track);
+    transition:
+      transform 0.2s,
+      filter 0.2s;
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      width: 150%;
+      aspect-ratio: 1;
+      background: conic-gradient(
+        transparent 0deg,
+        transparent 39%,
+        color-mix(in oklab, var(--shine-light) 12%, transparent) 44%,
+        var(--shine-light) 49%,
+        color-mix(in oklab, var(--shine-light) 35%, transparent) 54%,
+        transparent 60%,
+        transparent 100%
+      );
+      transform: translate(-50%, -50%);
+      animation: shine-spin 3.2s linear infinite;
+    }
+
+    &:hover:not(:disabled) {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0) scale(0.98);
+    }
+  }
+
+  .shine-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: inherit;
+    padding-inline: 0.75rem;
+    border-radius: calc(var(--radius-lg) - 2px);
+    background: radial-gradient(
+      ellipse 50.45% 100% at 49.55% 101.25%,
+      var(--bevel-inverse-from),
+      var(--bevel-inverse-to)
+    );
+    box-shadow: var(--bevel-inverse-shadow);
+    color: var(--bevel-inverse-text);
+  }
+}
+
+@keyframes shine-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shine::after {
+    animation: none;
+  }
+
+  .bevel,
+  .bevel::before,
+  .bevel::after,
+  .bevel-quiet,
+  .shine {
+    transition-duration: 0s;
+  }
+}
