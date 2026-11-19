@@ -6,6 +6,7 @@
 @import "./scroll-fade-effect.css";
 @import "./style-preview.css";
 @import "./dev-theme.css";
+@import "./bevel-buttons.css";
 
 @plugin "@tailwindcss/typography";
 
