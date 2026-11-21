@@ -31,6 +31,8 @@ export const USER: User = {
 - Google Cloud certified Associate Cloud Engineer; I build AI-powered side projects with Gemini and Claude on weekends.
 `,
   avatar: "/images/avatar.webp",
+  avatarVice: "/images/avatar-vice.webp",
+  bannerVice: "/images/banner-vice.webp",
   ogImage: "/images/og-image.png",
   timeZone: "Asia/Kolkata",
   keywords: [

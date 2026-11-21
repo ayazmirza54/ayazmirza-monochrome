@@ -18,6 +18,7 @@ import {
   SquareTerminalIcon,
   SunMediumIcon,
   TextInitialIcon,
+  TreePalmIcon,
   TypeIcon,
 } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -227,7 +228,7 @@ export function CommandMenu({
   )
 
   const createThemeHandler = useCallback(
-    (theme: "light" | "dark" | "dev" | "system") => () => {
+    (theme: "light" | "dark" | "dev" | "vice" | "system") => () => {
       click()
       setOpen(false)
 
@@ -361,6 +362,14 @@ export function CommandMenu({
               >
                 <SquareTerminalIcon />
                 Dev
+              </CommandMenuItem>
+              <CommandMenuItem
+                keywords={["theme", "gta", "vice city", "sunset"]}
+                onHighlight={handleCommandHighlight}
+                onSelect={createThemeHandler("vice")}
+              >
+                <TreePalmIcon />
+                Vice
               </CommandMenuItem>
               <CommandMenuItem
                 keywords={["theme"]}

@@ -22,6 +22,7 @@ export const META_THEME_COLORS = {
   light: "#ffffff",
   dark: "#09090b",
   dev: "#020c05",
+  vice: "#1a0b2e",
 }
 
 export const MAIN_NAV: NavItem<Route>[] = [
