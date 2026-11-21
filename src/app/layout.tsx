@@ -149,6 +149,12 @@ export default function RootLayout({
           }}
         />
         <JsonLdScript data={getWebSiteJsonLd()} />
+        {/* Sidealytics: cookieless analytics */}
+        <Script
+          src="https://sidealytics-khaki.vercel.app/script.js"
+          data-site="d8icjjdw75"
+          strategy="afterInteractive"
+        />
       </head>
 
       {process.env.NEXT_PUBLIC_GTM_ID && (
