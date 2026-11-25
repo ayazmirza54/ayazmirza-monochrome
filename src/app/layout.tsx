@@ -20,7 +20,7 @@ function getWebSiteJsonLd(): WithContext<WebSite> {
     "@id": JSON_LD_ID.website,
     name: SITE_INFO.name,
     url: SITE_INFO.url,
-    author: personJsonLd,
+    author: { "@id": JSON_LD_ID.person },
   }
 }
 
@@ -149,6 +149,7 @@ export default function RootLayout({
           }}
         />
         <JsonLdScript data={getWebSiteJsonLd()} />
+        <JsonLdScript data={personJsonLd} />
         {/* Sidealytics: cookieless analytics */}
         <Script
           src="https://sidealytics-khaki.vercel.app/script.js"
