@@ -158,9 +158,9 @@ export default function RootLayout({
         />
       </head>
 
-      {process.env.NEXT_PUBLIC_GTM_ID && (
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
-      )}
+      <GoogleTagManager
+        gtmId={process.env.NEXT_PUBLIC_GTM_ID || "GTM-M3V2NB2Z"}
+      />
 
       <body>
         <Providers>
